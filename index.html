@@ -11,13 +11,6 @@ async function init() {
 
 const data = await d3.csv('https://github.com/luma-vasiljevic/luma-vasiljevic.github.io/blob/main/data.csv');
 
-d3.select('body')
-.selectAll('p')
-.data(data)
-.enter()
-.append('p')
-
-
 var svg = d3.select("svg"),
         margin = 50,
         width = svg.attr("width") - 2*margin,
