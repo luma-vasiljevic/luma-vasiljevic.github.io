@@ -1,96 +1,56 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-
-<!-- Circle are black when hovered-->
-<style>
-.myCircle:hover {
-  stroke: black;
-}
-</style>
-
 <html>
-<body>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<style> circle {fill: lightblue; stroke: black;} </style>
+<body onload='init()'>
 <h1>Hello World</h1>
 <p>ver1</p>
+<svg width=300 height=300>
+</svg>
 <script>
+async function init() {
 
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+const data = await d3.csv('https://flunky.github.io/cars2017.csv');
 
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+d3.select('body')
+.selectAll('p')
+.data(data)
+.enter()
+.append('p')
+.html(function(d,i) {return 'Average City MPG: ' + d.AverageCityMPG +', Average Hightway MPG: ' +d.AverageHighwayMPG +'.';})
 
-//Read the data
-d3.csv("https://github.com/luma-vasiljevic/luma-vasiljevic.github.io/blob/main/data.csv",
+var svg = d3.select("svg"),
+        margin = 50,
+        width = svg.attr("width") - 2*margin,
+        height = svg.attr("height") - 2*margin;
 
-  // When reading the csv, I must format variables:
-  function(d){
-    return { Year : d3.timeParse("%Y")(d.Year), value : d.Annual_Wage_in_2009_Dollars }
-  },
+const xScale = d3.scaleLog()
+  .range([0, width]),
+  
+   yScale = d3.scaleLog().range ([height, 0]);
+   
+   xScale.domain([10,150]);
+   yScale.domain([10,150]);
 
-  // Now I can use this dataset:
-  function(data) {
+   g = svg.append("g")
+  g.attr("transform", "translate(" + margin + "," + margin + ")")
+   .selectAll('circle')
+   .data(data)
+   .enter()
+   .append('circle')
+   .attr('cx',function(d) {return  xScale(d.AverageCityMPG);})
+   .attr('cy',function(d) { return yScale(d.AverageHighwayMPG); })
+   .attr('r',function(d) { return 2+1*d.EngineCylinders; });
 
-    // Add X axis --> it is a date format
-    var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.Year; }))
-      .range([ 0, width ]);
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain( [18000, 110000])
-      .range([ height, 0 ]);
-    svg.append("g")
-      .call(d3.axisLeft(y));
-
-    // Add the line
-    svg.append("path")
-      .datum(data)
-      .filter(function(d) { return d.Title = 'National average' })
-      .attr("fill", "none")
-      .attr("stroke", "black")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .curve(d3.curveBasis) // Just add that to have a curve instead of segments
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.value) })
-        )
-
-     // Add the points
-    svg
-      .append("g")
-      .selectAll("dot")
-      .data(data)
-      .enter()
-      .append("circle")
-        .attr("class", "myCircle")
-        .attr("cx", function(d) { return x(d.Year) } )
-        .attr("cy", function(d) { return y(d.value) } )
-        .attr("r", 8)
-        .attr("stroke", "#69b3a2")
-        .attr("stroke-width", 3)
-        .attr("fill", "white")
-
-})
+ d3.select("svg").append("g")
+.attr("transform", "translate(" + margin + "," + margin + ")")
+.call(d3.axisLeft(yScale).tickValues([10,20,50,100]).tickFormat(d3.format("~s")))
 
 
+ d3.select("svg").append("g")
+.attr("transform", "translate(" + margin + "," +(height + margin) + ")")
+.call(d3.axisBottom(xScale).tickValues([10,20,50,100]).tickFormat(d3.format("~s")))
+
+}
 </script>
 </body>
 </html>
