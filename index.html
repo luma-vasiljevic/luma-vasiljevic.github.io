@@ -30,8 +30,8 @@ const xScale = d3.scaleLinear()
   
    yScale = d3.scaleLinear().range ([height, 0]);
    
-   xScale.domain([0, 2019]);
-   yScale.domain([0, 50000]);
+   xScale.domain([2009, 2019]);
+   yScale.domain([10000, 55000]);
 
    g = svg.append("g")
   g.attr("transform", "translate(" + margin + "," + margin + ")")
