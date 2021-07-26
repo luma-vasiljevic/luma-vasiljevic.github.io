@@ -32,10 +32,6 @@ const xScale = d3.scaleBand()
    yScale = d3.scaleLinear().range ([height, 0]).domain([18000, 120000]);
    
     
-   // Define the axes
-var xAxis = d3.svg.axis().xScale
-    .orient("bottom").ticks(10)
-    .tickFormat(d3.time.format("~s")); // tickFormat
     
    g = svg.append("g")
    g.attr("transform", "translate(" + margin + "," + margin + ")")
