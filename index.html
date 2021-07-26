@@ -71,9 +71,9 @@ var valueline = d3.svg.line()
     .y(function(d) { return yScale(d.Annual_Wage_in_2009_Dollars); });
                     
     // Add the line
-   append("path")
+   svg.append("path")
         .attr("class", "line")
-        .attr("d", valueline(data));
+        .attr("d", valueline(data1));
  
   // text label for the x axis
   svg.append("text")             
