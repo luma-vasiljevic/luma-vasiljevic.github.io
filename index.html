@@ -29,7 +29,8 @@ const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/lu
 var svg = d3.select("svg"),
         margin = 50,
         width = svg.attr("width") - 2*margin,
-        height = svg.attr("height") - 2*margin;
+        height = svg.attr("height") - 2*margin,
+        formatComma = d3.format(",");
 
 const xScale = d3.scaleBand()
   .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
@@ -51,7 +52,7 @@ const xScale = d3.scaleBand()
 
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
-.call(d3.axisLeft(yScale).tickFormat(d => "$"+formatDecimalComma(d)))
+.call(d3.axisLeft(yScale).tickFormat(d => "$"+formatComma(d)))
 
 
 d3.select("svg").append("g")
