@@ -68,7 +68,7 @@ d3.select("svg").append("g")
   // text label for the x axis
   svg.append("text")             
       .attr("transform",
-            "translate(" + (width/2) + " ," + 
+            "translate(" + (width/2 + margin/2) + " ," + 
                            (height + 2*margin) + ")")
       .style("text-anchor", "middle")
       .text("Year");                 
