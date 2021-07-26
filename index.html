@@ -64,19 +64,16 @@ d3.select("svg").append("g")
             .attr("transform", function(d) {
                 return "rotate(-65)" 
                 });
-                
+
+// Define the line
+var valueline = d3.svg.line()
+    .x(function(d) { return xScale(d.Year); })
+    .y(function(d) { return yScale(d.Annual_Wage_in_2009_Dollars); });
+                    
     // Add the line
-    svg.append("path")
-    .attr("transform", "translate(" + margin + "," +(height + margin) + ")")
-      .datum(data1)
-      .attr("fill", "none")
-      .attr("stroke", "black")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .curve(d3.curveBasis) // Just add that to have a curve instead of segments
-        .x(xScale(d.Year))
-        .y(yScale(d.Annual_Wage_in_2009_Dollars))
-        )            
+   append("path")
+        .attr("class", "line")
+        .attr("d", valueline(data1));
  
   // text label for the x axis
   svg.append("text")             
