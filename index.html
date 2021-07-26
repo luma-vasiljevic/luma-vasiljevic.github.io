@@ -25,10 +25,10 @@ var svg = d3.select("svg"),
         width = svg.attr("width") - 2*margin,
         height = svg.attr("height") - 2*margin;
 
-const xScale = d3.scaleLog()
+const xScale = d3.scaleLinear()
   .range([0, width]),
   
-   yScale = d3.scaleLog().range ([height, 0]);
+   yScale = d3.scaleLinear().range ([height, 0]);
    
    xScale.domain([10,150]);
    yScale.domain([10,150]);
