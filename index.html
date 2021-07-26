@@ -31,7 +31,7 @@ const xScale = d3.scaleBand()
   
    yScale = d3.scaleLinear().range ([height, 0]).domain([18000, 120000]);
    
-    
+   yScale.domain(d3.extent(data1, function(d) { return +d.Annual_Wage_in_2009_Dollars; }));
     
    g = svg.append("g")
    g.attr("transform", "translate(" + margin + "," + margin + ")")
