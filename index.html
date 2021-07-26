@@ -30,11 +30,7 @@ var svg = d3.select("svg"),
         width = svg.attr("width") - 2*margin,
         height = svg.attr("height") - 2*margin,
         formatComma = d3.format(",");
-svg path {
-  fill: none;
-  stroke: #000;
-  stroke-width: 3;
-}
+
 const xScale = d3.scaleBand()
   .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
   .range([0, width]),
