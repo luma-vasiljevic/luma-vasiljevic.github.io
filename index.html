@@ -30,7 +30,7 @@ const xScale = d3.scaleBand()
   .range([0, width]),
   
    yScale = d3.scaleLinear().range ([height, 0])
-   .domain(d3.extent(data1, function(d) { return +d.Annual_Wage_in_2009_Dollars; }));
+   .domain(d3.extent(data1.filter(function(d) { return d.Title == 'National average' }), function(d) { return +d.Annual_Wage_in_2009_Dollars; }));
     
    g = svg.append("g")
    g.attr("transform", "translate(" + margin + "," + margin + ")")
