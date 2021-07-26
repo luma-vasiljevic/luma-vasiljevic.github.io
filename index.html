@@ -75,9 +75,8 @@ d3.select("svg").append("g")
       
        // text label for the y axis
   svg.append("text")
-      .attr("transform",  "rotate(-90)" )
-      .attr("x", (width/2 + margin/2) )
-      .attr("y",(height/2 + margin/2))
+      .attr("dx", (width/2 + margin/2) )
+      .attr("dy",(height/2 + margin/2))
       .text("Value");                   
 
 }
