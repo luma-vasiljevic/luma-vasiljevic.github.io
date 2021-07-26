@@ -54,6 +54,11 @@ const line = d3.line()
   .y(d => yScale(d.Annual_Wage_in_2009_Dollars))
   .curve(d3.curveCatmullRom.alpha(.5))
 
+d3.select('svg')
+  .append('path') // add a path to the existing svg
+  .datum(data1)
+  .attr('d', line) // do your magic, line!
+  
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
 .call(d3.axisLeft(yScale).tickFormat(d => "$"+formatComma(d)));
