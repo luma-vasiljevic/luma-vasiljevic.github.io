@@ -15,7 +15,6 @@
 <script>
 async function init() {
 
-const data = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/cars2017.csv');
 const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv');
 
 //d3.select('body')
@@ -65,6 +64,19 @@ d3.select("svg").append("g")
             .attr("transform", function(d) {
                 return "rotate(-65)" 
                 });
+                
+// Add the line
+    svg.append("path")
+      .datum(data1)
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.value) })
+        )                
+ 
   // text label for the x axis
   svg.append("text")             
       .attr("transform",
