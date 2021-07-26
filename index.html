@@ -27,7 +27,7 @@ const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/lu
 //.html(function(d,i) {return 'Title: ' + d.Title + ' ,Year: ' + d.Year +', Annual_Wage_in_2009_Dollars: ' +d.Annual_Wage_in_2009_Dollars +'.';})
 
 var svg = d3.select("svg"),
-        margin = 50,
+        margin = 70,
         width = svg.attr("width") - 2*margin,
         height = svg.attr("height") - 2*margin,
         formatComma = d3.format(",");
