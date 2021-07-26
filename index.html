@@ -27,10 +27,9 @@ const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/lu
 //.html(function(d,i) {return 'Title: ' + d.Title + ' ,Year: ' + d.Year +', Annual_Wage_in_2009_Dollars: ' +d.Annual_Wage_in_2009_Dollars +'.';})
 
 var svg = d3.select("svg"),
-        margin.left = 70,
-        margin.top=50,
-        width = svg.attr("width") - 2*margin.left,
-        height = svg.attr("height") - 2*margin.top,
+        margin = 70,
+        width = svg.attr("width") - 2*margin,
+        height = svg.attr("height") - 2*margin,
         formatComma = d3.format(",");
 
 const xScale = d3.scaleBand()
@@ -41,7 +40,7 @@ const xScale = d3.scaleBand()
    .domain(d3.extent(data1.filter(function(d) { return d.Title == 'National average' }), function(d) { return +d.Annual_Wage_in_2009_Dollars; }));
     
    g = svg.append("g")
-   g.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+   g.attr("transform", "translate(" + margin + "," + margin + ")")
    .selectAll('circle')
    .data(data1)
    .enter()
@@ -52,12 +51,12 @@ const xScale = d3.scaleBand()
    .attr('r',5);
 
 d3.select("svg").append("g")
-.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+.attr("transform", "translate(" + margin + "," + margin + ")")
 .call(d3.axisLeft(yScale).tickFormat(d => "$"+formatComma(d)));
 
 
 d3.select("svg").append("g")
-.attr("transform", "translate(" + margin.left + "," +(height + margin.top) + ")")
+.attr("transform", "translate(" + margin + "," +(height + margin) + ")")
 .call(d3.axisBottom(xScale))
 .selectAll("text")	
             .style("text-anchor", "end")
@@ -69,8 +68,8 @@ d3.select("svg").append("g")
   // text label for the x axis
   svg.append("text")             
       .attr("transform",
-            "translate(" + (width/2 + margin.left/2) + " ," + 
-                           (height + 2*margin.top) + ")")
+            "translate(" + (width/2 + margin/2) + " ," + 
+                           (height + 2*margin) + ")")
       .style("text-anchor", "middle")
       .text("Year");    
       
