@@ -67,14 +67,15 @@ d3.select("svg").append("g")
                 
     // Add the line
     svg.append("path")
+    .attr("transform", "translate(" + margin + "," +(height + margin) + ")")
       .datum(data1)
       .attr("fill", "none")
       .attr("stroke", "black")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
         .curve(d3.curveBasis) // Just add that to have a curve instead of segments
-        .x(function(d) { return xScale(d.Year) })
-        .y(function(d) { return yScale(d.Annual_Wage_in_2009_Dollars) })
+        .x(d.Year)
+        .y(d.Annual_Wage_in_2009_Dollars)
         )            
  
   // text label for the x axis
