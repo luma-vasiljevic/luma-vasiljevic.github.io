@@ -48,6 +48,11 @@ const xScale = d3.scaleBand()
    .attr('cx',function(d) {return  xScale(d.Year);})
    .attr('cy',function(d) { return yScale(d.Annual_Wage_in_2009_Dollars); })
    .attr('r',5);
+   
+const line = d3.line()
+  .x(d => xScale(d.Year))
+  .y(d => yScale(d.Annual_Wage_in_2009_Dollars))
+  .curve(d3.curveCatmullRom.alpha(.5))
 
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
@@ -65,15 +70,7 @@ d3.select("svg").append("g")
                 return "rotate(-65)" 
                 });
 
-// Define the line
-//var valueline = d3.svg.line()
-//    .xScale(function(d) { return xScale(d.Year); })
-//    .yScale(function(d) { return yScale(d.Annual_Wage_in_2009_Dollars); });
-                    
-    // Add the line
-  // svg.append("path")
- //       .attr("class", "line")
- //       .attr("d", valueline(data1));
+
  
   // text label for the x axis
   svg.append("text")             
