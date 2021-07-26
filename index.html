@@ -52,7 +52,7 @@ const xScale = d3.scaleBand()
 
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
-.call(d3.axisLeft(yScale).tickFormat(d => "$"+formatComma(d)))
+.call(d3.axisLeft(yScale).tickFormat(d => "$"+formatComma(d)));
 
 
 d3.select("svg").append("g")
@@ -64,12 +64,13 @@ d3.select("svg").append("g")
             .attr("dy", ".15em")
             .attr("transform", function(d) {
                 return "rotate(-65)" 
-                })
+                });
+                
   // text label for the x axis
-  svg.append("text")             
+ d3.select("svg").append("text")             
       .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (height + margin.top + 20) + ")")
+                           (height + margin + 20) + ")")
       .style("text-anchor", "middle")
       .text("Date");                 
 
