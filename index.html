@@ -65,14 +65,13 @@ d3.select("svg").append("g")
             .attr("transform", function(d) {
                 return "rotate(-65)" 
                 })
-
-  // text label for the x axis
-  d3.select("svg").append("text")             
-      .attr("transform",
+          .append("text")             
+        .attr("transform",
             "translate(" + (width/2) + " ," + 
                            (height + margin.top + 20) + ")")
       .style("text-anchor", "middle")
-      .text("Year");
+      .text("Year")
+
 }
 </script>
 </body>
