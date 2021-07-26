@@ -66,9 +66,10 @@ d3.select("svg").append("g")
                 });
                 
 // Add the line
-    d3.select("svg").append("path")
+    d3.select("svg")
     .attr("transform", "translate(" + margin + "," + margin + ")")
       .data(data1)
+      .enter().append("path")
       .attr("fill", "none")
       .attr("stroke", "black")
       .attr("stroke-width", 1.5)
