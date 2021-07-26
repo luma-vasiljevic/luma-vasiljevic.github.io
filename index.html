@@ -44,14 +44,14 @@ const xScale = d3.scaleLinear()
    .attr('cy',function(d) { return yScale(d.Annual_Wage_in_2009_Dollars); })
    .attr('r',5);
 
-// d3.select("svg").append("g")
-//.attr("transform", "translate(" + margin + "," + margin + ")")
-//.call(d3.axisLeft(yScale) //.tickValues([10,20,50,100]).tickFormat(d3.format("~s")))
+d3.select("svg").append("g")
+.attr("transform", "translate(" + margin + "," + margin + ")")
+.call(d3.axisLeft(yScale) //.tickValues([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019]).tickFormat(d3.format("~s")))
 
 
-//d3.select("svg").append("g")
-//.attr("transform", "translate(" + margin + "," +(height + margin) + ")")
-//.call(d3.axisBottom(xScale) //.tickValues([10,20,50,100]).tickFormat(d3.format("~s")))
+d3.select("svg").append("g")
+.attr("transform", "translate(" + margin + "," +(height + margin) + ")")
+.call(d3.axisBottom(xScale) //.tickValues([35000, 40000, 45000, 50000, 55000]).tickFormat(d3.format("~s")))
 
 }
 </script>
