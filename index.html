@@ -50,7 +50,14 @@ d3.select("svg").append("g")
 
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," +(height + margin) + ")")
-.call(d3.axisBottom(xScale))
+.call(d3.axisBottom(xScale)
+.selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                }))
 //.tickValues([35000, 40000, 45000, 50000, 55000]).tickFormat(d3.format("~s")))
 
 }
