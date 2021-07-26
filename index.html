@@ -29,8 +29,8 @@ const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/lu
 var svg = d3.select("svg"),
         margin.left = 70,
         margin.top=50,
-        width = svg.attr("width") - 2*margin,
-        height = svg.attr("height") - 2*margin,
+        width = svg.attr("width") - 2*margin.left,
+        height = svg.attr("height") - 2*margin.top,
         formatComma = d3.format(",");
 
 const xScale = d3.scaleBand()
