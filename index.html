@@ -3,46 +3,52 @@
 <style> circle {fill: lightblue; stroke: black;} </style>
 <body onload='init()'>
 <h1>Hello World</h1>
-<p>ver4</p>
+<p>ver2</p>
 <svg width=300 height=300>
 </svg>
 <script>
 async function init() {
 
-const data = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv');
+const data = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/cars2017.csv');
 
+d3.select('body')
+.selectAll('p')
+.data(data)
+.enter()
+.append('p')
+.html(function(d,i) {return 'Average City MPG: ' + d.AverageCityMPG +', Average Hightway MPG: ' +d.AverageHighwayMPG +'.';})
 
 var svg = d3.select("svg"),
         margin = 50,
         width = svg.attr("width") - 2*margin,
         height = svg.attr("height") - 2*margin;
 
-const xScale = d3.scaleBand()
-  .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019])
+const xScale = d3.scaleLog()
   .range([0, width]),
   
-   yScale = d3.scaleLinear().range ([height, 0]);
-   yScale.domain([18000, 110000]);
+   yScale = d3.scaleLog().range ([height, 0]);
+   
+   xScale.domain([10,150]);
+   yScale.domain([10,150]);
 
    g = svg.append("g")
-   g.attr("transform", "translate(" + margin + "," + margin + ")")
+  g.attr("transform", "translate(" + margin + "," + margin + ")")
    .selectAll('circle')
    .data(data)
-   .filter(function(d) { return d.Title = 'National average' })
    .enter()
    .append('circle')
-   .attr('cx',function(d) {return  xScale(d.Year);})
-   .attr('cy',function(d) { return yScale(d.Annual_Wage_in_2009_Dollars); })
+   .attr('cx',function(d) {return  xScale(d.AverageCityMPG);})
+   .attr('cy',function(d) { return yScale(d.AverageHighwayMPG); })
    .attr('r',function(d) { return 2+1*d.EngineCylinders; });
 
  d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
-.call(d3.axisLeft(yScale)
+.call(d3.axisLeft(yScale).tickValues([10,20,50,100]).tickFormat(d3.format("~s")))
 
 
  d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," +(height + margin) + ")")
-.call(d3.axisBottom(xScale)
+.call(d3.axisBottom(xScale).tickValues([10,20,50,100]).tickFormat(d3.format("~s")))
 
 }
 </script>
