@@ -58,8 +58,6 @@ d3.select('svg')
   .append('path') // add a path to the existing svg
   .datum(data1.filter(function(d) { return d.Title == 'National average' }))
   .attr('d', line)
-  .style("stroke-width", 4)
-  .style("fill", "none")
   .attr("transform", "translate(" + margin + "," + margin + ")")
    // do your magic, line!
   
