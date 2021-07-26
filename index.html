@@ -52,7 +52,13 @@ const xScale = d3.scaleBand()
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
 .call(d3.axisLeft(yScale))
-
+.selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return '$'+d
+                })
 
 
 d3.select("svg").append("g")
