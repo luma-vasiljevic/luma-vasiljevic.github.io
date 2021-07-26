@@ -52,7 +52,7 @@ const xScale = d3.scaleBand()
 const line = d3.line()
   .x(d => xScale(d.Year))
   .y(d => yScale(d.Annual_Wage_in_2009_Dollars))
- 
+  .curve(d3.curveCatmullRom.alpha(.5))
 
 d3.select('svg')
   .append('path') // add a path to the existing svg
