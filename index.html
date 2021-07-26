@@ -47,13 +47,13 @@ const xScale = d3.scaleBand()
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," + margin + ")")
 .call(d3.axisLeft(yScale))
-//.tickValues([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019]).tickFormat(d3.format("~s")))
+
 
 
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," +(height + margin) + ")")
 .call(d3.axisBottom(xScale))
-//.tickValues([35000, 40000, 45000, 50000, 55000]).tickFormat(d3.format("~s")))
+
 
 }
 </script>
