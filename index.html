@@ -33,7 +33,7 @@ const xScale = d3.scaleBand()
    
     
    // Define the axes
-var xAxis = d3.svg.axis().scale(xScale)
+var xAxis = d3.svg.axis().xScale
     .orient("bottom").ticks(10)
     .tickFormat(d3.time.format("~s")); // tickFormat
     
