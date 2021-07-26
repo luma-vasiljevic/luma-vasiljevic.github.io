@@ -10,13 +10,14 @@
 async function init() {
 
 const data = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/cars2017.csv');
+const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv');
 
 d3.select('body')
 .selectAll('p')
-.data(data)
+.data(data1)
 .enter()
 .append('p')
-.html(function(d,i) {return 'Average City MPG: ' + d.AverageCityMPG +', Average Hightway MPG: ' +d.AverageHighwayMPG +'.';})
+.html(function(d,i) {return 'Year: ' + d.Year +', Annual_Wage_in_2009_Dollars: ' +d.Annual_Wage_in_2009_Dollars +'.';})
 
 var svg = d3.select("svg"),
         margin = 50,
