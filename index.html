@@ -30,7 +30,13 @@ const xScale = d3.scaleBand()
   .range([0, width]),
   
    yScale = d3.scaleLinear().range ([height, 0]).domain([18000, 120000]);
-
+   
+    
+   // Define the axes
+var xAxis = d3.svg.axis().scale(xScale)
+    .orient("bottom").ticks(10)
+    .tickFormat(d3.time.format("~s")); // tickFormat
+    
    g = svg.append("g")
    g.attr("transform", "translate(" + margin + "," + margin + ")")
    .selectAll('circle')
@@ -50,14 +56,7 @@ d3.select("svg").append("g")
 
 d3.select("svg").append("g")
 .attr("transform", "translate(" + margin + "," +(height + margin) + ")")
-.call(d3.axisBottom(xScale)
-.selectAll("text")	
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-65)" 
-                }))
+.call(d3.axisBottom(xScale))
 //.tickValues([35000, 40000, 45000, 50000, 55000]).tickFormat(d3.format("~s")))
 
 }
