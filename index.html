@@ -15,6 +15,7 @@ const data1 = await d3.csv('https://raw.githubusercontent.com/luma-vasiljevic/lu
 d3.select('body')
 .selectAll('p')
 .data(data1)
+ .filter(function(d) { return d.Title = 'National average' })
 .enter()
 .append('p')
 .html(function(d,i) {return 'Year: ' + d.Year +', Annual_Wage_in_2009_Dollars: ' +d.Annual_Wage_in_2009_Dollars +'.';})
