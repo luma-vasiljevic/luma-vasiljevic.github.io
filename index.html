@@ -55,7 +55,6 @@ const line = d3.line()
   .curve(d3.curveCatmullRom.alpha(.5))
 
 d3.select('svg')
-  .attr("transform", "translate(" + margin + "," + margin + ")")
   .append('path') // add a path to the existing svg
   .datum(data1.filter(function(d) { return d.Title == 'National average' }))
   .attr('d', line) // do your magic, line!
