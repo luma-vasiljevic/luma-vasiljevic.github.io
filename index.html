@@ -271,7 +271,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .append("circle")
    .attr("cx",  function(d) { return x(d.Percent_Difference_From_National_Average)})
     .attr("cy", function(d) { return y(d.Title)+10; })
-    .attr("fill", function(d){ return myColor(selectedGroup) })
+    .attr("fill", "orange")
    .attr("r", 5)
     .on("mouseover", mouseover)
    .on("mousemove", mousemove)
