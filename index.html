@@ -216,7 +216,8 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("x", function(d) { return x(Math.min(0, d.Percent_Difference_From_National_Average)); })
     .attr("y", function(d) { return y(d.Title); })
     .attr("width", function(d) { return Math.abs(x(d.Percent_Difference_From_National_Average) - x(0)); })
-    .attr("height", y.rangeBand());
+    .attr("height", y.rangeBand())
+    .attr("transform", "translate(x(0),height)");
 
 //    .attr("fill", "#69b3a2")
 
