@@ -220,6 +220,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("y", function(d) { return y(d.Title); })
     .attr("width", function(d) { return x(d.Percent_Difference_From_National_Average); })
     .attr("height", y.bandwidth() )
+    .attr("transform", "translate(210," + height + ")")
     .attr("fill", "#69b3a2")
      
 
