@@ -165,7 +165,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .range(d3.schemeSet2);
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.Percent_Difference_From_National_Average; }))
+      .domain([-150,150])
       .range([ 0, width ]);
     
     svg1.append("g")
