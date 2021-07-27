@@ -213,15 +213,27 @@ var yAxis = d3.svg.axis()
 
     // Initialize line with first group of the list
     svg1
-    .selectAll("rect")
+    .selectAll(".bar")
     .datum(data.filter(function(d){return d.Year==allGroup[0]}))
     .enter()
     .append("rect")
-    .attr("x", x(0) )
-    .attr("y", function(d) { return y(d.Title); })
-    .attr("width", function(d) { return x(d.Percent_Difference_From_National_Average); })
-    .attr("height", y.bandwidth() )
-    .attr("fill", "#69b3a2")
+      .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); })
+      .attr("x", function(d) { return x(Math.min(0,d.Percent_Difference_From_National_Average)); })
+      .attr("y", function(d) { return y(d.Title); })
+      .attr("width", function(d) { return Math.abs(x(d.Percent_Difference_From_National_Average) - x(0)); })
+      .attr("height", y.rangeBand());
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + x(0) + ",0)")
+      .call(yAxis); 
+      
+    
      
 
     // A function that update the chart
@@ -252,4 +264,8 @@ var yAxis = d3.svg.axis()
     })
 
 })
+function type(d) {
+  d.Percent_Difference_From_National_Average = +d.Percent_Difference_From_National_Average;
+  return d;
+}
 </script>
