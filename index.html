@@ -170,17 +170,19 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     
     svg1.append("g")
       .attr("transform", "translate(210," + height + ")")
+      .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
     // Add Y axis
-   var y = d3.scaleBand()
+  
+    var y = d3.scaleBand()
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }))
-    
     .padding(.1);
   
     svg1.append("g")
-     .attr("transform", "translate(" + x(0) + ",0)")
+   .attr("transform", "translate(" + x(0) + ",0)")
     .call(d3.axisLeft(y))
+    
     // Initialize line with first group of the list
     svg1
     .selectAll("rect")
