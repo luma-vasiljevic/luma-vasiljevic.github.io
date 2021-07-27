@@ -217,7 +217,7 @@ var yAxis = d3.svg.axis()
     .datum(data.filter(function(d){return d.Year==allGroup[0]}))
     .enter()
     .append("rect")
-      .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); })
+      .attr("class", function(d) { return "bar bar--" + (d.Percent_Difference_From_National_Average < 0 ? "negative" : "positive"); })
       .attr("x", function(d) { return x(Math.min(0,d.Percent_Difference_From_National_Average)); })
       .attr("y", function(d) { return y(d.Title); })
       .attr("width", function(d) { return Math.abs(x(d.Percent_Difference_From_National_Average) - x(0)); })
@@ -262,10 +262,10 @@ var yAxis = d3.svg.axis()
         // run the updateChart function with this selected option
         update(selectedOption)
     })
-
-})
 function type(d) {
   d.Percent_Difference_From_National_Average = +d.Percent_Difference_From_National_Average;
   return d;
 }
+});
+
 </script>
