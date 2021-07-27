@@ -164,12 +164,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .domain(allGroup)
       .range(d3.schemeSet2);
     // Add X axis --> it is a date format
+  
     var x = d3.scaleLinear()
-      .domain([-210,210])
+      .domain([-220,220])
       .range([ 0, width ]);
     
     svg1.append("g")
-      .attr("transform", "translate(210," + height + ")")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
     // Add Y axis
