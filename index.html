@@ -30,7 +30,7 @@ var margin = {top: 30, right: 30, bottom: 50, left: 70},
       formatComma = d3.format(",");
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var chart1 = d3.select("#my_dataviz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -55,7 +55,7 @@ var svg = d3.select("#my_dataviz")
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
     
-    svg.append("g")
+    chart1.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
       
@@ -64,12 +64,12 @@ var svg = d3.select("#my_dataviz")
    .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
    .range([ height, 0 ]);
     
-    svg.append("g")
+    chart1.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
       
       
     // Add the line
-    svg.append("path")
+    chart1.append("path")
       .datum(data.filter(function(d) { return d.Title == 'National average' }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
@@ -80,7 +80,7 @@ var svg = d3.select("#my_dataviz")
         )
  
      // text label for the x axis
-    svg.append("text")             
+    chart1.append("text")             
       .attr("transform",
             "translate(" + (width/2 + margin.left/2) + " ," + 
                            (height + margin.bottom -20) + ")")
@@ -88,7 +88,7 @@ var svg = d3.select("#my_dataviz")
       .text("Year");    
       
        // text label for the y axis
-  svg.append("text")
+  chart1.append("text")
       .attr("dx", (0-40) )
       .attr("dy",(0-10))
       .text("National Average Annual Wage in 2009 Dollars");  
@@ -121,7 +121,7 @@ var svg = d3.select("#my_dataviz")
       }
       
          // Add the points
-    svg
+    chart1
       .append("g")
       .selectAll("dot")
       .data(data.filter(function(d) { return d.Title == 'National average' }))
