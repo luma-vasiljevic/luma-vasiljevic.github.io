@@ -235,12 +235,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
           .style("opacity", 0)
       }
      
-    
+      var dataFilter = data.filter(function(d){return d.Year==allGroup[0]})
     
     // Initialize line with first group of the list
     svg1
     .selectAll("circle")
-    .data(data.filter(function(d){return d.Year==allGroup[0]}))
+    .data(dataFilter)
     .enter()
     .append("circle")
     .attr("cx",  function(d) { return x(d.Percent_Difference_From_National_Average)})
@@ -281,6 +281,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .on("mouseover", mouseover)
    .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
+    
     svg1.append("text")             
       .attr("transform",
             "translate(" + (width/2 + margin.left/2) + " ," + 
