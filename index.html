@@ -23,8 +23,7 @@ path {
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
-<!-- Initialize a select button -->
-<select id="selectButton"></select>
+
 <style> circle {fill: lightblue; stroke: black;} </style>
 <body onload='init()'>
 <h1>Inflation Adjusted National Average Annual Wage by Year</h1>
@@ -32,6 +31,8 @@ path {
 <h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
 <h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
 
+<!-- Initialize a select button -->
+<select id="selectButton"></select>
 
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
@@ -162,7 +163,6 @@ var svg = d3.select("#my_dataviz")
 })
 
 //Chart2
-
 //Read the data
 d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
 
