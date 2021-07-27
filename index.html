@@ -23,7 +23,7 @@ path {
 <h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
 <h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
 <!-- Initialize a select button -->
-<select id="selectButton" , style = "position:relative; left:700px; top:0px; background-color:yellow;">
+<select id="selectButton" , style = "position:relative; left:800px; top:10px; background-color:yellow;">
 </select>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz">
@@ -39,8 +39,8 @@ path {
 <script>
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 50, left: 70},
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom
       formatComma = d3.format(",");
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
