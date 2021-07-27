@@ -198,7 +198,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .domain(d3.extent(data, function(d) { return d.Percent_Difference_From_National_Average; }))
       .range([ 0, width ]);
     svg1.append("g")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(100," + height + ")")
       .call(d3.axisBottom(x));
 
     // Add Y axis
