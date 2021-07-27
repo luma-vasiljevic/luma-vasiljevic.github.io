@@ -13,6 +13,7 @@
 
 
 <!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
 
 <!-- Circle are black when hovered-->
 <style>
@@ -20,7 +21,7 @@
   stroke: black;
 }
 </style>
-<body>
+
 <script>
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 50, left: 70},
@@ -29,7 +30,7 @@ var margin = {top: 30, right: 30, bottom: 50, left: 70},
       formatComma = d3.format(",");
 
 // append the svg object to the body of the page
-var chart1 = d3.select("body")
+var svg = d3.select("#my_dataviz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -54,7 +55,7 @@ var chart1 = d3.select("body")
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
     
-    chart1.append("g")
+    svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
       
@@ -63,12 +64,12 @@ var chart1 = d3.select("body")
    .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
    .range([ height, 0 ]);
     
-    chart1.append("g")
+    svg.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
       
       
     // Add the line
-    chart1.append("path")
+    svg.append("path")
       .datum(data.filter(function(d) { return d.Title == 'National average' }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
@@ -79,7 +80,7 @@ var chart1 = d3.select("body")
         )
  
      // text label for the x axis
-    chart1.append("text")             
+    svg.append("text")             
       .attr("transform",
             "translate(" + (width/2 + margin.left/2) + " ," + 
                            (height + margin.bottom -20) + ")")
@@ -87,7 +88,7 @@ var chart1 = d3.select("body")
       .text("Year");    
       
        // text label for the y axis
-  chart1.append("text")
+  svg.append("text")
       .attr("dx", (0-40) )
       .attr("dy",(0-10))
       .text("National Average Annual Wage in 2009 Dollars");  
@@ -120,7 +121,7 @@ var chart1 = d3.select("body")
       }
       
          // Add the points
-    chart1
+    svg
       .append("g")
       .selectAll("dot")
       .data(data.filter(function(d) { return d.Title == 'National average' }))
@@ -133,7 +134,5 @@ var chart1 = d3.select("body")
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
-});
-
+})
 </script>
-</body>
