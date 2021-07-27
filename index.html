@@ -184,6 +184,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
     // A color scale: one color for each group
+  
     var myColor = d3.scaleOrdinal()
       .domain(allGroup)
       .range(d3.schemeSet2);
@@ -242,7 +243,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .append("circle")
     .attr("cx",  function(d) { return x(d.Percent_Difference_From_National_Average)})
     .attr("cy", function(d) { return y(d.Title)+10; })
-    .attr("fill", "#69b3a2") 
+    .attr("fill",  function(d){ return myColor(selectedGroup) }) 
     .attr("transform", "translate(x(0),height)")
    .attr("r", 5)
    .on("mouseover", mouseover)
