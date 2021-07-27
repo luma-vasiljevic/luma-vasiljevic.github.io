@@ -1,26 +1,11 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style> /* set the CSS */
 
-body { font: 12px Arial;}
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
 
-path { 
-  stroke: steelblue;
-	stroke-width: 2;
-	fill: none;
-}
-
-.axis path,
-.axis line {
-	fill: none;
-	stroke: grey;
-	stroke-width: 1;
-	shape-rendering: crispEdges;
-}
-
-</style>
-
-<body>
+<style> circle {fill: lightblue; stroke: black;} </style>
+<body onload='init()'>
 <h1>Inflation Adjusted National Average Annual Wage by Year</h1>
 
 <h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
@@ -36,24 +21,29 @@ path {
   stroke: black;
 }
 </style>
-<!-- load the d3.js library -->	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 
 <script>
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 50, left: 70},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom
+      formatComma = d3.format(",");
 
-// Set the dimensions of the canvas / graph
-var	margin = {top: 30, right: 20, bottom: 30, left: 50},
-	width = 400 - margin.left - margin.right,
-	height = 220 - margin.top - margin.bottom;
-
-  
-// Adds the svg canvas
-var	chart1 = d3.select("#my_dataviz")
-	.append("svg")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
-	.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")"),
+    svg1 = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")")   ;
 
 //Read the data
  data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
@@ -65,7 +55,7 @@ var	chart1 = d3.select("#my_dataviz")
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
     
-    chart1.append("g")
+    svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
       
@@ -74,12 +64,12 @@ var	chart1 = d3.select("#my_dataviz")
    .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
    .range([ height, 0 ]);
     
-    chart1.append("g")
+    svg.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
       
       
     // Add the line
-    chart1.append("path")
+    svg.append("path")
       .datum(data.filter(function(d) { return d.Title == 'National average' }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
@@ -90,7 +80,7 @@ var	chart1 = d3.select("#my_dataviz")
         )
  
      // text label for the x axis
-    chart1.append("text")             
+    svg.append("text")             
       .attr("transform",
             "translate(" + (width/2 + margin.left/2) + " ," + 
                            (height + margin.bottom -20) + ")")
@@ -98,7 +88,7 @@ var	chart1 = d3.select("#my_dataviz")
       .text("Year");    
       
        // text label for the y axis
-  chart1.append("text")
+  svg.append("text")
       .attr("dx", (0-40) )
       .attr("dy",(0-10))
       .text("National Average Annual Wage in 2009 Dollars");  
@@ -131,7 +121,7 @@ var	chart1 = d3.select("#my_dataviz")
       }
       
          // Add the points
-    chart1
+    svg
       .append("g")
       .selectAll("dot")
       .data(data.filter(function(d) { return d.Title == 'National average' }))
@@ -145,6 +135,4 @@ var	chart1 = d3.select("#my_dataviz")
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 })
-
 </script>
-</body>
