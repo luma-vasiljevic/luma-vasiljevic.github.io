@@ -44,7 +44,7 @@ var svg = d3.select("#my_dataviz")
     
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickFormat(d => "$"+formatComma(d)));
+      .call(d3.axisBottom(x));
       
     // Add Y axis
     var y  = d3.scaleLinear().range ([height, 0])
@@ -52,7 +52,7 @@ var svg = d3.select("#my_dataviz")
    .range([ height, 0 ]);
     
     svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
       
       
     // Add the line
