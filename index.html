@@ -23,7 +23,8 @@ path {
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
-
+<!-- Initialize a select button -->
+<select id="selectButton"></select>
 <style> circle {fill: lightblue; stroke: black;} </style>
 <body onload='init()'>
 <h1>Inflation Adjusted National Average Annual Wage by Year</h1>
@@ -161,8 +162,7 @@ var svg = d3.select("#my_dataviz")
 })
 
 //Chart2
-<!-- Initialize a select button -->
-<select id="selectButton"></select>
+
 //Read the data
 d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
 
