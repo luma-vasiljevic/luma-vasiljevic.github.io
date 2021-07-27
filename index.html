@@ -265,7 +265,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .selectAll("circle")
     .data(dataFilter)
     .transition()
-    .duration(1000)
+    .duration(10000000)
     .enter()
     .append("circle")
    .attr("cx",  function(d) { return x(d.Percent_Difference_From_National_Average)})
