@@ -98,7 +98,7 @@ var svg = d3.select("#my_dataviz")
       }
       var mousemove = function(d) {
         Tooltip
-          .html("Annual Wage in 2009 Dollars for Year " d.Year + "Was: $" + formatComma(d.Annual_Wage_in_2009_Dollars))
+          .html("Annual Wage in 2009 Dollars for Year " + d.Year + "Was: $" + formatComma(d.Annual_Wage_in_2009_Dollars))
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
