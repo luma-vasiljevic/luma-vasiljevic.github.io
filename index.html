@@ -213,7 +213,6 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .data(data.filter(function(d){return d.Year==allGroup[0]}))
     .enter()
     .append("rect")
-    .attr("class", function(d) { return "bar bar--" + (d.Percent_Difference_From_National_Average < 0 ? "negative" : "positive"); })
     .attr("x", function(d) { return x(Math.min(0, d.Percent_Difference_From_National_Average)); })
     .attr("y", function(d) { return y(d.Title); })
     .attr("width", function(d) { return Math.abs(x(d.Percent_Difference_From_National_Average) - x(0)); })
