@@ -234,6 +234,13 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
         Tooltip
           .style("opacity", 0)
       }
+      svg1.append("text")             
+      .attr("transform",
+            "translate(" + (width/2 + margin.left/2) + " ," + 
+                           (height + margin.bottom -20) + ")")
+      .style("text-anchor", "middle")
+      .text("Percent Difference From National Average for Selected Year");  
+    
     
     // Initialize line with first group of the list
     svg1
