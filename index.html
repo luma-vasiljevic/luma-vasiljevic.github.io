@@ -211,7 +211,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
     // Initialize line with first group of the list
     svg1
-    .selectAll("myRect")
+    .selectAll("rect")
     .datum(data.filter(function(d){return d.Year==allGroup[0]}))
     .enter()
     .append("rect")
@@ -230,7 +230,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
       // Give these new data to update line
   svg1
-    .selectAll("myRect")
+    .selectAll("rect")
     .data(dataFilter)
     .enter()
     .append("rect")
