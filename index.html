@@ -191,24 +191,44 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .domain(allGroup)
       .range(d3.schemeSet2);
 
-    // Add X axis --> it is a date format
-    var x = d3.scaleLinear()
-      .domain([-100,200])
-      .range([ 0, width ]);
-    
-    svg1.append("g")
-      .attr("transform", "translate(210," + height + ")")
-      .call(d3.axisBottom(x));
+   var x = d3.scale.linear()
+    .range([0, width]);
 
-    // Add Y axis
-   var y = d3.scaleBand()
-    .range([ 0, height ])
-    .domain(data.map(function(d) { return d.Title; }))
-    .padding(.1);
-  
-    svg1.append("g")
-     .attr("transform", "translate(210,0)")
-    .call(d3.axisLeft(y))
+var y = d3.scale.ordinal()
+    .rangeRoundBands([0, height], 0.1);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickSize(0)
+    .tickPadding(6);
+    
+    d3.tsv("data.tsv", type, function(error, data) {
+  x.domain(d3.extent(data, function(d) { return d.Percent_Difference_From_National_Average; })).nice();
+  y.domain(data.map(function(d) { return d.Year; }));
+
+  svg1.selectAll(".bar")
+      .data(data.filter(function(d){return d.Year==allGroup[0]}))
+      .enter().append("rect")
+      .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); })
+      .attr("x", function(d) { return x(Math.min(0, d.value)); })
+      .attr("y", function(d) { return y(d.name); })
+      .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
+      .attr("height", y.rangeBand());
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + x(0) + ",0)")
+      .call(yAxis);
 
     // Initialize line with first group of the list
     svg1
