@@ -23,7 +23,7 @@ path {
 <h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
 <h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
 <!-- Initialize a select button -->
-<select id="selectButton" , style = "position:relative; left:600px; top:0px; background-color:yellow;">
+<select id="selectButton" , style = "position:relative; left:700px; top:0px; background-color:yellow;">
 </select>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz">
@@ -175,10 +175,11 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
    var y = d3.scaleBand()
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }))
+    
     .padding(.1);
   
     svg1.append("g")
-     .attr("transform", "translate(210,0)")
+     .attr("transform", "translate(" + x(0) + ",0)")
     .call(d3.axisLeft(y))
     // Initialize line with first group of the list
     svg1
