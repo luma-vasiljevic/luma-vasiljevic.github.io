@@ -234,11 +234,10 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .data(dataFilter)
     .enter()
     .append("circle")
-    .attr("x", x(0) )
-    .attr("y", function(d) { return y(d.Title); })
-    .attr("width", function(d) { return x(d.Percent_Difference_From_National_Average); })
-    .attr("height", y.bandwidth() )
+   .attr("cx",  function(d) { return x(d.Percent_Difference_From_National_Average)})
+    .attr("cy", function(d) { return y(d.Title); })
     .attr("fill", "#69b3a2")
+   .attr("r", 8)
     }
     // When the button is changed, run the updateChart function
     d3.select("#selectButton").on("change", function(d) {
