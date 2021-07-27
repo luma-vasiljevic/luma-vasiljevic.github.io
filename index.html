@@ -33,18 +33,18 @@ var svg = d3.select("#my_dataviz")
 
 //Read the data
  data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
-  function(d){
-    return { Year : d.Year, Annual_Wage_in_2009_Dollars: d.Annual_Wage_in_2009_Dollars }
-  },
+
   // Now I can use this dataset:
   function(data) {
     // Add X axis --> it is a date format
     var x = d3.scaleBand()
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
+    
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
+      
     // Add Y axis
     var y  = d3.scaleLinear().range ([height, 0])
    .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
