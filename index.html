@@ -58,7 +58,7 @@ var svg = d3.select("#my_dataviz")
       .attr("stroke", "#69b3a2")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x(d.Year })
+        .x(function(d) { return x(d.Year) })
         .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
         )
     // Add the points
