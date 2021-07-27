@@ -45,13 +45,13 @@ var svg = d3.select("#my_dataviz")
       .call(d3.axisBottom(x));
     // Add Y axis
     var y  = d3.scaleLinear().range ([height, 0])
-   .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return +d.Annual_Wage_in_2009_Dollars; }));
+   .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }));
     
     svg.append("g")
       .call(d3.axisLeft(y));
     // Add the line
     svg.append("path")
-      .datum(data)
+      .datum(data).filter(function(d) { return d.Title == 'National average' })
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
       .attr("stroke-width", 1.5)
