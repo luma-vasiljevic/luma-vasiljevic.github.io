@@ -1,16 +1,43 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@luma-vasiljevic 
+luma-vasiljevic
+/
+luma-vasiljevic.github.io
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Update index.html
+ main
+@luma-vasiljevic
+luma-vasiljevic committed 2 hours ago 
+1 parent cfa36ea commit 02d41f034dcb4c69c09c082e9beab4045d1e4a32
+Showing  with 1 addition and 2 deletions.
+ 3  index.html 
+@@ -1,226 +1,225 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-
 <style> /* set the CSS */
-
 body { font: 12px Arial;}
-
 path { 
   stroke: steelblue;
 	stroke-width: 2;
 	fill: none;
 }
-
 .axis path,
 .axis line {
 	fill: none;
@@ -18,50 +45,34 @@ path {
 	stroke-width: 1;
 	shape-rendering: crispEdges;
 }
-
 </style>
-
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
-
 <style> circle {fill: lightblue; stroke: black;} </style>
 <body onload='init()'>
 <h1>Inflation Adjusted National Average Annual Wage by Year</h1>
-
 <h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
 <h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
 <!-- Initialize a select button -->
 <select id="selectButton" , style = "position:relative; left:600px; top:500px; background-color:yellow;">
 </select>
-
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz">
 </div>
-
-
-
 <!-- Color Scale -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
 <!-- Circle are black when hovered-->
 <style>
 .myCircle:hover {
   stroke: black;
 }
 </style>
-
 <script>
-
-
-
-
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 50, left: 70},
     width = 500 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom
       formatComma = d3.format(",");
-
-
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
@@ -78,10 +89,8 @@ var svg = d3.select("#my_dataviz")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")")   ;
-
 //Read the data
  data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
-
   // Now I can use this dataset:
   function(data) {
     // Add X axis --> it is a date format
@@ -137,7 +146,6 @@ var svg = d3.select("#my_dataviz")
       .style("border-width", "2px")
       .style("border-radius", "5px")
       .style("padding", "5px")
-
       // Three function that change the tooltip when user hover / move / leave a cell
       var mouseover = function(d) {
         Tooltip
@@ -169,83 +177,59 @@ var svg = d3.select("#my_dataviz")
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 })
-
 //Chart2
 //Read the data
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv", function(data) {
-
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.Year)}).keys()
-
     // add the options to the button
     d3.select("#selectButton")
       .selectAll('myOptions')
-     .data(allGroup)
+     	.data(allGroup)
       .enter()
-     .append('option')
+    	.append('option')
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
-
     // A color scale: one color for each group
     var myColor = d3.scaleOrdinal()
       .domain(allGroup)
       .range(d3.schemeSet2);
-
-var x = d3.scale.linear()
-    .range([0, width]);
-
-var y = d3.scale.ordinal()
-    .rangeRoundBands([0, height], 0.1);
-   
-    x.domain([-60,150])
-    y.domain(data.map(function(d) { return d.Title; }))
-
-var xAxis = d3.svg1.axis()
-    .scale(x)
-    .orient("bottom");
-
-var yAxis = d3.svg1.axis()
-    .scale(y)
-    .orient("left")
-    .tickSize(0)
-    .tickPadding(6);
-     
-     
-
-
- svg1.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
+    // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain(d3.extent(data, function(d) { return d.Percent_Difference_From_National_Average; }))
+      .range([ 0, width ]);
+    
+    svg1.append("g")
+      .attr("transform", "translate(210," + height + ")")
       .call(d3.axisBottom(x));
-
-  svg1.append("g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + x(0) + ",0)")
-      .call(d3.axisLeft(y)); 
-   
-  //   generate bar
+    // Add Y axis
+   var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.Title; }))
+    .padding(.1);
+  
+    svg1.append("g")
+     .attr("transform", "translate(210,0)")
+    .call(d3.axisLeft(y))
+    // Initialize line with first group of the list
     svg1
-    .selectAll(".bar")
-    .datum(data.filter(function(d){return d.Year==allGroup[0]}))
+    .selectAll("rect")
+    .data(data.filter(function(d){return d.Year==allGroup[0]}))
     .enter()
     .append("rect")
-      .attr("class", function(d) { return "bar bar--" + (d.Percent_Difference_From_National_Average < 0 ? "negative" : "positive"); })
-      .attr("x", function(d) { return x(Math.min(0,d.Percent_Difference_From_National_Average)); })
-      .attr("y", function(d) { return y(d.Title); })
-      .attr("width", function(d) { return Math.abs(x(d.Percent_Difference_From_National_Average) - x(0)); })
-      .attr("height", y.rangeBand());
+    .attr("x", x(0) )
+    .attr("x", 210 )
+    .attr("y", function(d) { return y(d.Title); })
+    .attr("width", function(d) { return x(d.Percent_Difference_From_National_Average); })
+    .attr("height", y.bandwidth() )
+    .attr("transform", "translate(210," + height + ")")
+    .attr("fill", "#69b3a2")
 
- 
-      
-    
-     
 
     // A function that update the chart
     function update(selectedGroup) {
-
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
-
       // Give these new data to update line
   svg1
     .selectAll("rect")
@@ -258,7 +242,6 @@ var yAxis = d3.svg1.axis()
     .attr("height", y.bandwidth() )
     .attr("fill", "#69b3a2")
     }
-
     // When the button is changed, run the updateChart function
     d3.select("#selectButton").on("change", function(d) {
         // recover the option that has been chosen
@@ -266,10 +249,26 @@ var yAxis = d3.svg1.axis()
         // run the updateChart function with this selected option
         update(selectedOption)
     })
-function type(d) {
-  d.Percent_Difference_From_National_Average = +d.Percent_Difference_From_National_Average;
-  return d;
-}
-});
-
+})
 </script>
+0 comments on commit 02d41f0
+@luma-vasiljevic
+ 
+ 
+Leave a comment
+No file chosen
+Attach files by dragging & dropping, selecting or pasting them.
+ You’re receiving notifications because you’re watching this repository.
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
