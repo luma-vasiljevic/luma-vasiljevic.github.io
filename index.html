@@ -4,14 +4,6 @@
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
-<style> circle {fill: lightblue; stroke: black;} </style>
-<body onload='init()'>
-<h1>Inflation Adjusted National Average Annual Wage by Year</h1>
-
-<h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
-<h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
-
-
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
@@ -21,13 +13,12 @@
   stroke: black;
 }
 </style>
-
 <script>
+
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 50, left: 70},
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom
-      formatComma = d3.format(",");
+    height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -46,38 +37,43 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")")   ;
 
 //Read the data
- data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/connectedscatter.csv",
+
+  // When reading the csv, I must format variables:
+  function(d){
+    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+  },
 
   // Now I can use this dataset:
   function(data) {
+
     // Add X axis --> it is a date format
-    var x = d3.scaleBand()
-    .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
-    .range([0, width]);
-    
+    var x = d3.scaleTime()
+      .domain(d3.extent(data, function(d) { return d.date; }))
+      .range([ 0, width ]);
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
-      
+
     // Add Y axis
-    var y  = d3.scaleLinear().range ([height, 0])
-   .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
-   .range([ height, 0 ]);
-    
+    var y = d3.scaleLinear()
+      .domain( [8000, 9200])
+      .range([ height, 0 ]);
     svg.append("g")
-      .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
-      
-      
+      .call(d3.axisLeft(y));
+
     // Add the line
     svg.append("path")
-      .datum(data.filter(function(d) { return d.Title == 'National average' }))
+      .datum(data)
       .attr("fill", "none")
-      .attr("stroke", "#69b3a2")
+      .attr("stroke", "black")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x(d.Year) })
-        .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
+        .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.value) })
         )
+<<<<<<< HEAD
  
      // text label for the x axis
     svg.append("text")             
@@ -168,6 +164,10 @@ var svg = d3.select("#my_dataviz")
         // create a tooltip
 =======
 >>>>>>> parent of df4fa4b (Update index.html)
+=======
+
+    // create a tooltip
+>>>>>>> parent of fb7529b (Update index.html)
     var Tooltip = d3.select("#my_dataviz")
       .append("div")
       .style("opacity", 0)
@@ -185,7 +185,7 @@ var svg = d3.select("#my_dataviz")
       }
       var mousemove = function(d) {
         Tooltip
-          .html("National Average Annual Wage in 2009 Dollars for Year " + d.Year + " Was $" + formatComma(d.Annual_Wage_in_2009_Dollars))
+          .html("Exact value: " + d.value)
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
@@ -193,24 +193,34 @@ var svg = d3.select("#my_dataviz")
         Tooltip
           .style("opacity", 0)
       }
+<<<<<<< HEAD
       
          // Add the points
 <<<<<<< HEAD
     svg1
 =======
+=======
+
+    // Add the points
+>>>>>>> parent of fb7529b (Update index.html)
     svg
 >>>>>>> parent of df4fa4b (Update index.html)
       .append("g")
       .selectAll("dot")
-      .data(data.filter(function(d) { return d.Title == 'National average' }))
+      .data(data)
       .enter()
       .append("circle")
-      .attr("class", "myCircle")
-        .attr("cx", function(d) { return x(d.Year) } )
-        .attr("cy", function(d) { return y(d.Annual_Wage_in_2009_Dollars) } )
-        .attr("r", 5)
+        .attr("class", "myCircle")
+        .attr("cx", function(d) { return x(d.date) } )
+        .attr("cy", function(d) { return y(d.value) } )
+        .attr("r", 8)
+        .attr("stroke", "#69b3a2")
+        .attr("stroke-width", 3)
+        .attr("fill", "white")
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 })
+
+
 </script>
