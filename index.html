@@ -281,6 +281,13 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .on("mouseover", mouseover)
    .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
+    
+     svg1.append("text")             
+      .attr("transform",
+            "translate(" + (width/2 + margin.left/2) + " ," + 
+                           (height + margin.bottom -20) + ")")
+      .style("text-anchor", "middle")
+      .text("Percent Difference From National Average for Year " + selectedGroup); 
     }
     // When the button is changed, run the updateChart function
     d3.select("#selectButton").on("change", function(d) {
