@@ -80,8 +80,8 @@ var svg = d3.select("#my_dataviz")
    // text label for the x axis
     svg.append("text")             
       .attr("transform",
-            "translate(" + (width/2 + margin.left/2) + " ," + 
-                           (height + 2*margin.bottom -20) + ")")
+            "translate(" + (width/2 + margin.left) + " ," + 
+                           (height + margin.bottom -20) + ")")
       .style("text-anchor", "middle")
       .text("Year");    
       
