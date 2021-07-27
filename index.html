@@ -51,8 +51,7 @@ var svg = d3.select("#my_dataviz")
    .range([ height, 0 ]);
     
     svg.append("g")
-      .call(d3.axisLeft(y))
-      .tickFormat(d => "$"+formatComma(d));
+      .call(d3.axisLeft(y));
       
       
     // Add the line
