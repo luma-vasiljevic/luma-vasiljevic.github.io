@@ -184,14 +184,17 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
     // A color scale: one color for each group
-  
+ 
+     var dataFilter = data.filter(function(d){return d.Year==allGroup[0]})
+ 
     var myColor = d3.scaleOrdinal()
       .domain(allGroup)
       .range(d3.schemeSet2);
+      
     // Add X axis --> it is a date format
   
     var x = d3.scaleLinear()
-      .domain([-320,320])
+      .domain(d3.extent(dataFilter, function(d) { return d.Percent_Difference_From_National_Average; }))
       .range([ 0, width ]);
     
     svg1.append("g")
@@ -206,7 +209,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     svg1.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
     .call(d3.axisLeft(y))
-    
+       
            // create a tooltip
     var Tooltip = d3.select("#my_dataviz")
       .append("div")
@@ -235,7 +238,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
           .style("opacity", 0)
       }
      
-      var dataFilter = data.filter(function(d){return d.Year==allGroup[0]})
+
     
     // Initialize line with first group of the list
     svg1
