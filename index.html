@@ -208,7 +208,7 @@ var yAxis = d3.svg.axis()
     .tickPadding(6);
      
      
-    x.domain(d3.extent(data.filter(function(d){return d.Year==allGroup[0]}), function(d) { return d.Percent_Difference_From_National_Average; }))
+    x.domain([-60,150]))
     y.domain(data.map(function(d) { return d.Title; }))
 
  svg.append("g")
