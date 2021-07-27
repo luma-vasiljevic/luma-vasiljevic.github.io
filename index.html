@@ -197,11 +197,11 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 var y = d3.scale.ordinal()
     .rangeRoundBands([0, height], 0.1);
 
-var xAxis = d3.svg.axis()
+var xAxis = d3.svg1.axis()
     .scale(x)
     .orient("bottom");
 
-var yAxis = d3.svg.axis()
+var yAxis = d3.svg1.axis()
     .scale(y)
     .orient("left")
     .tickSize(0)
