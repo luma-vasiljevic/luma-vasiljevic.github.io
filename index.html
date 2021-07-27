@@ -56,7 +56,7 @@ var svg = d3.select("#my_dataviz")
       
     // Add the line
     svg.append("path")
-      .datum(data).filter(function(d) { return d.Title == 'National average' })
+      .datum(data.filter(function(d) { return d.Title == 'National average' }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
       .attr("stroke-width", 1.5)
@@ -68,7 +68,7 @@ var svg = d3.select("#my_dataviz")
     svg
       .append("g")
       .selectAll("dot")
-      .data(data).filter(function(d) { return d.Title == 'National average' })
+      .data(data.filter(function(d) { return d.Title == 'National average' }))
       .enter()
       .append("circle")
         .attr("cx", function(d) { return x(d.Year) } )
