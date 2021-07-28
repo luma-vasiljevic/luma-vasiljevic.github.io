@@ -182,9 +182,10 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
     // Initialize line with first group of the list
     var graph = svg1
-      .append('g')
+      .selectAll("circle")
+       .enter()
       .append("circle")
-        .datum(data.filter(function(d){return d.Year==allGroup[0]}))
+        .data(data.filter(function(d){return d.Year==allGroup[0]}))
         .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) })
          .attr("cy", function(d) { return y(d.Title) })
         .attr("r",10)
