@@ -188,6 +188,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
         .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) })
          .attr("cy", function(d) { return y(d.Title) })
         .attr("r",10)
+        attr("transform",  "translate(" + x(0) + ","+height+")")
         .style("fill", "lightblue")
 
     // A function that update the chart
