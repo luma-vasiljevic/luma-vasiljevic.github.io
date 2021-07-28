@@ -213,7 +213,7 @@ svg1.selectAll("circle")
       var dataset = data.filter(function(d){return d.Year==selectedGroup})
 
       //Update all rects
-   svg.selectAll("rect")
+   svg1.selectAll("rect")
      .data(dataset)
     .transition() // <---- Here is the transition
     .duration(2000) // 2 seconds
