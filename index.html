@@ -221,6 +221,10 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
         .attr("cy", function(d) { return y(d.Title)+10 })
         .attr("r", 7)
         .style("fill", "#69b3a2")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+        
         
 //    var line = svg1
 //      .append('g')
@@ -257,6 +261,9 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
         .duration(1000)
           .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) })
           .attr("cy", function(d) { return y(d.Title)+10 })
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
     }
 
     // When the button is changed, run the updateChart function
