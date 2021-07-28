@@ -52,7 +52,7 @@ var svg = d3.select('body').append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("data.json", function(error, data) {
+d3.json("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/grouped_bar.json", function(error, data) {
 
   var categoriesNames = data.map(function(d) { return d.categorie; });
   var rateNames = data[0].values.map(function(d) { return d.rate; });
