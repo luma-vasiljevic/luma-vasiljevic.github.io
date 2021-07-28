@@ -146,7 +146,7 @@ var svg = d3.select("#my_dataviz")
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv", function(data) {
 
     // List of groups (here I have one group per column)
-    var allGroup = d3.map(data, function(d){return(d.name)}).keys()
+    var allGroup = d3.map(data, function(d){return(d.Year)}).keys()
 
     // add the options to the button
     d3.select("#selectButton")
