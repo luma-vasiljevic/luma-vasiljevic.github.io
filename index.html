@@ -166,7 +166,6 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     var x = d3.scaleLinear()
       .domain(d3.extent(data.filter(function(d){return d.Year==allGroup[0]}), function(d) { return d.Percent_Difference_From_National_Average; }))
       .range([ 0, width ]);
-    
     svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
@@ -184,7 +183,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     var line = svg1
       .append('g')
       .append("path")
-        .datum(data.filter(function(d){return d.name==allGroup[0]}))
+        .datum(data.filter(function(d){return d.Year==allGroup[0]}))
         .attr("d", d3.line()
           .x(function(d) { return x(d.Percent_Difference_From_National_Average) })
           .y(function(d) { return y(d.Title) })
