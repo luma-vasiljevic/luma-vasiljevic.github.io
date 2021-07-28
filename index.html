@@ -183,9 +183,9 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .call(d3.axisLeft(y))
 
     // Initialize line with first group of the list
-    var dot = svg
+    var dot = svg1
       .selectAll('circle')
-      .data(data)
+      .data(dataFilter)
       .enter()
       .append('circle')
         .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) })
