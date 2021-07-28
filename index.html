@@ -143,7 +143,7 @@ var svg = d3.select("#my_dataviz")
 })
 //Chart2
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv", function(data) {
 
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.name)}).keys()
