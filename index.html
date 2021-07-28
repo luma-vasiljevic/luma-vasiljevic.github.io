@@ -199,7 +199,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.name==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
 
       // Give these new data to update line
       line
