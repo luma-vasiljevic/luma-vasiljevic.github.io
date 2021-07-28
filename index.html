@@ -179,18 +179,32 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .attr("transform", "translate(" + x(0) + ",0)")
       .call(d3.axisLeft(y));
 
+svg1.selectAll("circle")
+  .data(data.filter(function(d){return d.Year==allGroup[0]}))
+  .enter()
+  .append("circle")
+  .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) };)
+  .attr("cy", function(d) { return y(d.Title) ;})
+  .attr("r", 5) //Asks for the bandwith of the scale
+  .attr("fill", function(d) {
+    return "rgb("+ Math.round(d * 8) + ",0," + Math.round(d * 10) + ")"; //Change the color of the bar depending on the value
+  });
+
+
+
+
     // Initialize line with first group of the list
-    var line = svg1
-      .append('g')
-      .append("path")
-        .datum(data.filter(function(d){return d.Year==allGroup[0]}))
-        .attr("d", d3.line()
-          .x(function(d) { return x(d.Percent_Difference_From_National_Average) })
-          .y(function(d) { return y(d.Title) })
-        )
-        .attr("stroke", function(d){ return myColor("valueA") })
-        .style("stroke-width", 4)
-        .style("fill", "none")
+  //  var line = svg1
+  //    .append('g')
+  //    .append("path")
+ //       .datum(data.filter(function(d){return d.Year==allGroup[0]}))
+    //    .attr("d", d3.line()
+    //      .x(function(d) { return x(d.Percent_Difference_From_National_Average) })
+   //       .y(function(d) { return y(d.Title) })
+    //    )
+ //       .attr("stroke", function(d){ return myColor("valueA") })
+   //     .style("stroke-width", 4)
+    //    .style("fill", "none")
 
     // A function that update the chart
     function update(selectedGroup) {
