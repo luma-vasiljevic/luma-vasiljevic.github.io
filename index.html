@@ -186,7 +186,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     var line = svg1
       .append('g')
       .append("path")
-        .datum(data.filter(function(d){return d.name==allGroup[0]}))
+        .datum(dataFilter)
         .attr("d", d3.line()
           .x(function(d) { return x(d.Percent_Difference_From_National_Average) })
           .y(function(d) { return y(d.Title) })
