@@ -182,7 +182,13 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
    .attr("transform", "translate(" + x(0) + ",0)")
     .call(d3.axisLeft(y))
 
-
+    svg1.append("text")             
+      .attr("transform",
+            "translate(" + (width/2 + margin.left/2) + " ," + 
+                           (height + margin.bottom -20) + ")")
+      .style("text-anchor", "middle")
+      .text("Percent Difference From National Average");  
+      
         // create a tooltip
     var Tooltip = d3.select("#my_dataviz")
       .append("div")
