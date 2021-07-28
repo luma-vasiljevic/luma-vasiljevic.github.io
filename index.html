@@ -147,7 +147,9 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.Year)}).keys()
-
+    
+    var dataFilter = data.filter(function(d){return d.Year==allGroup[0]})
+    
     // add the options to the button
     d3.select("#selectButton")
       .selectAll('myOptions')
@@ -164,18 +166,21 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain(d3.extent(data, function(d) { return d.Percent_Difference_From_National_Average; }))
+      .domain(d3.extent(dataFilter, function(d) { return d.Percent_Difference_From_National_Average; }))
       .range([ 0, width ]);
-    svg1.append("g")
+     
+      svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(7));
+      .call(d3.axisBottom(x));
 
     // Add Y axis
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return d.Title; })])
-      .range([ height, 0 ]);
-    svg1.append("g")
-      .call(d3.axisLeft(y));
+     var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.Title; }));
+     
+       svg1.append("g")
+   .attr("transform", "translate(" + x(0) + ",0)")
+    .call(d3.axisLeft(y))
 
     // Initialize line with first group of the list
     var line = svg1
