@@ -75,6 +75,14 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
+   // text label for the x axis
+
+    svg1.append("text")             
+      .attr("dx",width/2 )
+      .attr("dy",(height + margin.bottom -20))
+      .style("text-anchor", "middle")
+      .text("Year");    
+      
     // Add Y axis
     var y = d3.scaleLinear()
       .domain( [0,110000])
