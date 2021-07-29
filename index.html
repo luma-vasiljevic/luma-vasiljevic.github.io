@@ -92,6 +92,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       
       svg1.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
+   
+       // text label for the y axis
+  svg1.append("text")
+      .attr("dx", 0)
+      .attr("dy",0)
+      .text("Annual Wage in 2009 Dollars");  
 
     // Initialize line with group a
     var line = svg1
