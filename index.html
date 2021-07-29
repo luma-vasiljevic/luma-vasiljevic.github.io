@@ -55,9 +55,7 @@ var svg = d3.select("#my_dataviz")
 //Read the data
  data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
   
-   // List of groups (here I have one group per column)
-    var allGroup = d3.map(data, function(d){return(d.Title)}).keys()
-             
+                
   // Now I can use this dataset:
   function(data) {
     // Add X axis --> it is a date format
