@@ -30,18 +30,16 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // set the dimensions and margins of the graph
-var margin1 = {top: 20, right: 30, bottom: 60, left: 50},
-    width1 = 400 - margin1.left - margin1.right,
-    height1 = 400 - margin1.top - margin1.bottom;
+
 
 // append the svg object to the body of the page
 var svg1 = d3.select("#my_dataviz")
   .append("svg")
-    .attr("width", width1 + margin1.left + margin1.right)
-    .attr("height", height1 + margin1.top + margin1.bottom)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin1.left + "," + margin1.top + ")");
+          "translate(" + margin.left + "," + margin.top + ")");
 // Parse the Data
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data_filtered.csv", function(data) {
 
@@ -192,14 +190,14 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     // Add X axis --> it is a date format
     var x = d3.scaleBand()
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
-    .range([0, width1]);
+    .range([0, width]);
     
     svg1.append("g")
-      .attr("transform", "translate(0," + height1-200 + ")")
+      .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
       
     // Add Y axis
-    var y  = d3.scaleLinear().range ([height1, 0])
+    var y  = d3.scaleLinear().range ([height, 0])
    .domain(d3.extent(data.filter(function(d) { return d.Title == allGroup[0] }), function(d) { return d.Annual_Wage_in_2009_Dollars; }));
     
     svg1.append("g")
@@ -208,8 +206,8 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
      // text label for the x axis
     svg1.append("text")             
       .attr("transform",
-            "translate(" + (width1/2 + margin1.left/2) + " ," + 
-                           (height1 + margin1.bottom -20) + ")")
+            "translate(" + (width/2 + margin.left/2) + " ," + 
+                           (height + margin.bottom -20) + ")")
       .style("text-anchor", "middle")
       .text("Year");    
       
