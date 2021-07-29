@@ -160,12 +160,12 @@ var svg = d3.select("#my_dataviz")
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.Title==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
       
     svg1.append("g")
      
       // Give these new data to update line
-      line=svg1
+      line
           .data(dataFilter)
           .transition()
           .duration(1000)
@@ -177,7 +177,7 @@ var svg = d3.select("#my_dataviz")
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
           
-      dots=svg1
+      dots
         .data(dataFilter)
         .transition()
         .duration(1000)
