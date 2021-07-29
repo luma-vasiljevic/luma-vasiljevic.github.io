@@ -3,7 +3,9 @@
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
-
+<h1>Changes in Inflation Adjusted National Average Annual Wage Occupation Between 2009 and 2019</h1>
+<h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
+<h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 <script>
@@ -75,6 +77,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("width", 10)
     .attr("height", 10 )
     .attr("fill", "#69b3a2")
+
+    svg.append("text")             
+      .attr("transform",
+            "translate("+3*width/5 + 20+","+ 3*height/4 +")"
+      .style("text-anchor", "middle")
+      .text("2019"); 
     
   svg.append("rect")
     .attr("x", 3*width/5)
@@ -83,6 +91,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("height", 10 )
     .attr("fill", "#ca0020")
 
+    svg.append("text")             
+      .attr("transform",
+            "translate("+3*width/5 + 20+","+ 3*height/4 +20+")"
+      .style("text-anchor", "middle")
+      .text("2009"); 
+      
      svg.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
     .call(d3.axisLeft(y))
@@ -93,6 +107,8 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
                            (height +margin.bottom - 10) + ")")
       .style("text-anchor", "middle")
       .text("Annual Wage in 2009 Dollars"); 
+      
+    
 
     // .attr("x", function(d) { return x(d.Country); })
     // .attr("y", function(d) { return y(d.Value); })
