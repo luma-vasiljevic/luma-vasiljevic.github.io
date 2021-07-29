@@ -125,7 +125,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .enter()
     .append("rect")
     .attr("x", x(0) )
-    .attr("y", function(d) { return y(d.Title)+10; })
+    .attr("y", function(d) { return y(d.Title)+5; })
     .attr("width", function(d) { return x(d.Y2009); })
     .attr("height", 5 )
     .attr("fill", "#ca0020")
