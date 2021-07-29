@@ -66,7 +66,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       }
       var mousemove = function(d) {
         Tooltip
-          .html("Annual wage for " +  d.Title + " changed by " + d.change + "% from $" + d.Y2009 +" (inflation adjusted 2009 dollars) to $" + d.Y2019 + " (inflation adjusted 2009 Dollars) ")
+          .html("Annual wage for " +  d.Title + " changed by " + d.change + "% from $" + d.Y2009 +" (inflation adjusted 2009 dollars) in 2009 to $" + d.Y2019 + " (inflation adjusted 2009 Dollars) in 2019 ")
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
