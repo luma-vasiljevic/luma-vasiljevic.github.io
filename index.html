@@ -61,7 +61,7 @@ var svg = d3.select("#my_dataviz")
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
     
-    svg.append("g")
+    svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
       
@@ -70,12 +70,12 @@ var svg = d3.select("#my_dataviz")
    .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
    .range([ height, 0 ]);
     
-    svg.append("g")
+    svg1.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
       
       
     // Add the line
-    svg.append("path")
+    svg1.append("path")
       .datum(data.filter(function(d) { return d.Title == 'National average' }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
@@ -86,7 +86,7 @@ var svg = d3.select("#my_dataviz")
         )
  
      // text label for the x axis
-    svg.append("text")             
+    svg1.append("text")             
       .attr("transform",
             "translate(" + (width/2 + margin.left/2) + " ," + 
                            (height + margin.bottom -20) + ")")
@@ -94,7 +94,7 @@ var svg = d3.select("#my_dataviz")
       .text("Year");    
       
        // text label for the y axis
-  svg.append("text")
+  svg1.append("text")
       .attr("dx", (0-40) )
       .attr("dy",(0-10))
       .text("National Average Annual Wage in 2009 Dollars");  
@@ -126,7 +126,7 @@ var svg = d3.select("#my_dataviz")
       }
       
          // Add the points
-    svg
+    svg1
       .append("g")
       .selectAll("dot")
       .data(data.filter(function(d) { return d.Title == 'National average' }))
@@ -169,7 +169,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .domain([-220,150])
       .range([ 0, width ]);
      
-      svg1.append("g")
+      svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).tickFormat(d => formatComma(d)+"%"));
 
@@ -178,11 +178,11 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }));
      
-       svg1.append("g")
+       svg.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
     .call(d3.axisLeft(y))
 
-    svg1.append("text")             
+    svg.append("text")             
       .attr("transform",
             "translate(" + (width/2 + margin.left/2) + " ," + 
                            (height + margin.bottom -20) + ")")
