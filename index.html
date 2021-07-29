@@ -160,7 +160,7 @@ var svg = d3.select("#my_dataviz")
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.Title==selectedGroup})
       
     svg1.append("g")
      
