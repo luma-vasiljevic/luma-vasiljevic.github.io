@@ -90,15 +90,17 @@ var svg = d3.select("#my_dataviz")
       
       
     // Add the line
-   var line = svg1.append("path")
-      .datum(data.filter(function(d) { return d.Title == allGroup[0] }))
-      .attr("fill", "none")
-      .attr("stroke", "#69b3a2")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.Year) })
-        .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
-        ) 
+     var line = svg
+      .append('g')
+      .append("path")
+        .datum(data.filter(function(d){return d.Title==allGroup[0]}))
+        .attr("d", d3.line()
+          .x(function(d) { return x(d.year) })
+          .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
+        )
+        .attr("stroke", function(d){ return myColor("valueA") })
+        .style("stroke-width", 4)
+        .style("fill", "none")
  
      // text label for the x axis
     svg1.append("text")             
