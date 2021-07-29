@@ -163,7 +163,7 @@ var svg = d3.select("#my_dataviz")
       var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
       
     svg1.append("g")
-      .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
+     
       // Give these new data to update line
       line
           .datum(dataFilter)
