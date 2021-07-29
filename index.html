@@ -68,7 +68,23 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("height", 10 )
     .attr("fill", "#ca0020")
     
-
+          //Bars
+  svg.append("rect")
+    .attr("x", 3*width/4)
+    .attr("y", 3*height/4)
+    .attr("width", 10)
+    .attr("height", 10 )
+    .attr("fill", "#69b3a2")
+    
+              //Bars
+//  svg.selectAll("myRect")
+//  .enter()
+//    .append("rect")
+//    .attr("x", x(80000) )
+//    .attr("y", y('National average')+10)
+//    .attr("width", 10)
+//    .attr("height", 10 )
+//    .attr("fill", "#ca0020")
 
      svg.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
