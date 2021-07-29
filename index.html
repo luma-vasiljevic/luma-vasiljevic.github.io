@@ -68,7 +68,6 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
      .attr("transform", "translate(-10,0)rotate(-45)")
      .style("text-anchor", "end");
 
-  // Y axis
   // Add Y axis
      var y = d3.scaleBand()
     .range([ 0, height ])
@@ -213,16 +212,15 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
      // text label for the x axis
     svg1.append("text")             
-      .attr("transform",
-            "translate(" + (width/2 ) + " ," + 
-                           (height + margin.bottom -20) + ")")
+      .attr("dx",width/2 )
+      .attr("dy",(height + margin.bottom -20))
       .style("text-anchor", "middle")
       .text("Year");    
       
        // text label for the y axis
   svg1.append("text")
-      .attr("dx", (0-40) )
-      .attr("dy",(0-10))
+      .attr("dx", 0)
+      .attr("dy",0)
       .text("Annual Wage in 2009 Dollars");  
       
         // create a tooltip
