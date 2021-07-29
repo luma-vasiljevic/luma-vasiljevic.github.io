@@ -53,10 +53,10 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")")   ;
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv", function(data) {
+d3.csv(""https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv"", function(data) {
 
     // List of groups (here I have one group per column)
-    var allGroup = ["valueA", "valueB", "valueC"]
+    var allGroup = d3.map(data, function(d){return(d.Title)}).keys()
 
     // add the options to the button
     d3.select("#selectButton")
@@ -68,8 +68,8 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
     // Add X axis --> it is a date format
-    var x = d3.scaleLinear()
-      .domain([0,10])
+    var x = d3.scaleBand()
+      .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
       .range([ 0, width ]);
     svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -77,7 +77,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain( [0,20])
+      .domain( [0,110000])
       .range([ height, 0 ]);
     svg1.append("g")
       .call(d3.axisLeft(y));
@@ -88,8 +88,8 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .append("path")
         .datum(data)
         .attr("d", d3.line()
-          .x(function(d) { return x(+d.time) })
-          .y(function(d) { return y(+d.valueA) })
+          .x(function(d) { return x(d.Year) })
+          .y(function(d) { return y(d.return d.Annual_Wage_in_2009_Dollars) })
         )
         .attr("stroke", "black")
         .style("stroke-width", 4)
@@ -101,8 +101,8 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .data(data)
       .enter()
       .append('circle')
-        .attr("cx", function(d) { return x(+d.time) })
-        .attr("cy", function(d) { return y(+d.valueA) })
+        .attr("cx", function(d) { return x(d.Year) })
+        .attr("cy", function(d) { return y(+d.Annual_Wage_in_2009_Dollars) })
         .attr("r", 7)
         .style("fill", "#69b3a2")
 
@@ -111,7 +111,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.map(function(d){return {time: d.time, value:d[selectedGroup]} })
+      var dataFilter = data.map(function(d){return {Title: d.Title, value:d[selectedGroup]} })
 
       // Give these new data to update line
       line
@@ -119,15 +119,15 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
           .transition()
           .duration(1000)
           .attr("d", d3.line()
-            .x(function(d) { return x(+d.time) })
-            .y(function(d) { return y(+d.value) })
+            .x(function(d) { return x(d.Year) })
+          .y(function(d) { return y(d.return d.Annual_Wage_in_2009_Dollars) })
           )
       dot
         .data(dataFilter)
         .transition()
         .duration(1000)
-          .attr("cx", function(d) { return x(+d.time) })
-          .attr("cy", function(d) { return y(+d.value) })
+        .attr("cx", function(d) { return x(d.Year) })
+        .attr("cy", function(d) { return y(+d.Annual_Wage_in_2009_Dollars) })
     }
 
     // When the button is changed, run the updateChart function
