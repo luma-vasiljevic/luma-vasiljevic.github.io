@@ -249,7 +249,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     // Initialize line with first group of the list
     var dot = svg1
       .selectAll('circle')
-      .datum(data.filter(function(d){return d.Title=='National average'}) )
+      .datum(data.filter(function(d){return d.Title==allGroup[0]}) )
       .enter()
       .append('circle')
         .attr("cx", function(d) { return x(d.Year) })
