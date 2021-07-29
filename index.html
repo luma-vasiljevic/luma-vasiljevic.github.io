@@ -86,7 +86,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     var line = svg1
       .append('g')
       .append("path")
-        .datum(data)
+        .datum(data.filter(function(d){return d.Title=='National average'}) )
         .attr("d", d3.line()
           .x(function(d) { return x(d.Year) })
           .y(function(d) { return y( d.Annual_Wage_in_2009_Dollars) })
@@ -98,7 +98,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     // Initialize dots with group a
     var dot = svg1
       .selectAll('circle')
-      .data(data)
+      .data(data.filter(function(d){return d.Title=='National average'}) )
       .enter()
       .append('circle')
         .attr("cx", function(d) { return x(d.Year) })
@@ -111,7 +111,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.Title==allGroup[0]}) 
+      var dataFilter = data.map(function(d){return {Title: d.Title, value:d[selectedGroup]} })
 
       // Give these new data to update line
       line
