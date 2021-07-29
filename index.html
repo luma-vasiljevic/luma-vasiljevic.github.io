@@ -131,7 +131,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       }
       var mousemove = function(d) {
         Tooltip
-          .html("Annual wage for " +  d.Title + " was $" + d.Annual_Wage_in_2009_Dollars + " in year " + d.Year +" (inflation adjusted 2009 dollars)"
+          .html("Annual wage for " +  d.Title + " was $" + d.Annual_Wage_in_2009_Dollars + " in year " + d.Year +" (inflation adjusted 2009 dollars)")
           .style("left", (d3.mouse(this)[0]+70) + "px")
           .style("top", (d3.mouse(this)[1]) + "px")
       }
