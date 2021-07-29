@@ -81,6 +81,9 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .range([ height, 0 ]);
     svg1.append("g")
       .call(d3.axisLeft(y));
+      
+      svg1.append("g")
+      .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
 
     // Initialize line with group a
     var line = svg1
