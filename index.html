@@ -53,15 +53,11 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")")   ;
 //Read the data
- data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
-                 
-  // Now I can use this dataset:
-  function(data) {
-  
-  // List of groups (here I have one group per column)
-    var allGroup = d3.map(data, function(d){return(d.Title)}).keys()
-    
-     
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv", function(data) {
+
+    // List of groups (here I have one group per column)
+    var allGroup = ["valueA", "valueB", "valueC"]
+
     // add the options to the button
     d3.select("#selectButton")
       .selectAll('myOptions')
@@ -70,122 +66,68 @@ var svg = d3.select("#my_dataviz")
     	.append('option')
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
-  
+
     // Add X axis --> it is a date format
-    var x = d3.scaleBand()
-    .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
-    .range([0, width]);
-    
+    var x = d3.scaleLinear()
+      .domain([0,10])
+      .range([ 0, width ]);
     svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
-      
+
     // Add Y axis
-    var y  = d3.scaleLinear().range ([height, 0])
-   .domain([0,120000])
-   .range([ height, 0 ]);
-    
+    var y = d3.scaleLinear()
+      .domain( [0,20])
+      .range([ height, 0 ]);
     svg1.append("g")
-      .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
-      
-      
-    // Add the line
-     var line = svg1
+      .call(d3.axisLeft(y));
+
+    // Initialize line with group a
+    var line = svg1
       .append('g')
       .append("path")
-        .datum(data.filter(function(d){return d.Title==allGroup[0]}))
+        .datum(data)
         .attr("d", d3.line()
-          .x(function(d) { return x(d.Year) })
-          .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
+          .x(function(d) { return x(+d.time) })
+          .y(function(d) { return y(+d.valueA) })
         )
-        .attr("stroke", function(d){ return myColor("valueA") })
+        .attr("stroke", "black")
         .style("stroke-width", 4)
         .style("fill", "none")
- 
-     // text label for the x axis
-    svg1.append("text")             
-      .attr("transform",
-            "translate(" + (width/2 ) + " ," + 
-                           (height + margin.bottom -20) + ")")
-      .style("text-anchor", "middle")
-      .text("Year");    
-      
-       // text label for the y axis
-  svg1.append("text")
-      .attr("dx", (0-40) )
-      .attr("dy",(0-10))
-      .text("Annual Wage in 2009 Dollars");  
-      
-        // create a tooltip
-    var Tooltip = d3.select("#my_dataviz")
-      .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
-      // Three function that change the tooltip when user hover / move / leave a cell
-      var mouseover = function(d) {
-        Tooltip
-          .style("opacity", 1)
-      }
-      var mousemove = function(d) {
-        Tooltip
-          .html("Average Annual Wage in 2009 Dollars for year " + d.Year +" for "+d.Title+ " was $" + formatComma(d.Annual_Wage_in_2009_Dollars))
-          .style("left", (d3.mouse(this)[0]+70) + "px")
-          .style("top", (d3.mouse(this)[1]) + "px")
-      }
-      var mouseleave = function(d) {
-        Tooltip
-          .style("opacity", 0)
-      }
-      
-         // Add the points
+
+    // Initialize dots with group a
     var dot = svg1
       .selectAll('circle')
-      .data(data.filter(function(d){return d.Title==allGroup[0]}))
+      .data(data)
       .enter()
       .append('circle')
-        .attr("cx", function(d) { return x(d.Year) })
-        .attr("cy", function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
+        .attr("cx", function(d) { return x(+d.time) })
+        .attr("cy", function(d) { return y(+d.valueA) })
         .attr("r", 7)
         .style("fill", "#69b3a2")
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-        
-       // A function that update the chart
+
+
+    // A function that update the chart
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.Title==selectedGroup})
-      
-    svg1.append("g")
-     
+      var dataFilter = data.map(function(d){return {time: d.time, value:d[selectedGroup]} })
+
       // Give these new data to update line
-      
-    line
+      line
           .datum(dataFilter)
           .transition()
           .duration(1000)
           .attr("d", d3.line()
-            .x(function(d) { return x(d.Year) })
-            .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
-          )   .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-          
+            .x(function(d) { return x(+d.time) })
+            .y(function(d) { return y(+d.value) })
+          )
       dot
         .data(dataFilter)
         .transition()
         .duration(1000)
-          .attr("cx", function(d) { return x(d.Year) })
-          .attr("cy", function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
+          .attr("cx", function(d) { return x(+d.time) })
+          .attr("cy", function(d) { return y(+d.value) })
     }
 
     // When the button is changed, run the updateChart function
@@ -195,6 +137,7 @@ var svg = d3.select("#my_dataviz")
         // run the updateChart function with this selected option
         update(selectedOption)
     })
+
 })
 // Chart 2
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data_filtered.csv", function(data) {
