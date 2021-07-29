@@ -37,11 +37,11 @@ var margin1 = {top: 20, right: 30, bottom: 60, left: 50},
 // append the svg object to the body of the page
 var svg1 = d3.select("#my_dataviz")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width + margin1.left + margin1.right)
+    .attr("height", height + margin1.top + margin1.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + margin1.left + "," + margin1.top + ")");
 // Parse the Data
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data_filtered.csv", function(data) {
 
