@@ -78,9 +78,10 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("height", 10 )
     .attr("fill", "#69b3a2")
 
-    svg.append("text")             
+   svg.append("text")             
       .attr("transform",
-            "translate("+3*width/5 + 20+","+ 3*height/4 +")")
+            "translate(" + (3*width/5 +20) + " ," + 
+                           (3*height/4) + ")")
       .style("text-anchor", "middle")
       .text("2019"); 
     
@@ -91,9 +92,10 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("height", 10 )
     .attr("fill", "#ca0020")
 
-    svg.append("text")             
+   svg.append("text")             
       .attr("transform",
-            "translate("+3*width/5 + 20+","+ 3*height/4 +20+")")
+            "translate(" + (3*width/5 +20) + " ," + 
+                           (3*height/4 +20) + ")")
       .style("text-anchor", "middle")
       .text("2009"); 
       
