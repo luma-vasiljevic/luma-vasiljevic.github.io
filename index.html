@@ -178,8 +178,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.Title)}).keys()
     
-    var dataFilter = data.filter(function(d){return d.Title==allGroup[0]})
-    
+     
     // add the options to the button
     d3.select("#selectButton")
       .selectAll('myOptions')
@@ -189,10 +188,6 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
-    // A color scale: one color for each group
-    var myColor = d3.scaleOrdinal()
-      .domain(allGroup)
-      .range(d3.schemeSet2);
 
     // Add X axis --> it is a date format
     var x = d3.scaleBand()
@@ -205,8 +200,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       
     // Add Y axis
     var y  = d3.scaleLinear().range ([height1, 0])
-   .domain(d3.extent(data.filter(function(d) { return d.Title == selectedGroup }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
-   .range([ height1, 0 ]);
+   .domain(d3.extent(data.filter(function(d) { return d.Title == allGroup[0] }), function(d) { return d.Annual_Wage_in_2009_Dollars; }));
     
     svg1.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
