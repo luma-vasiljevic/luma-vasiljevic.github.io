@@ -56,6 +56,17 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("width", function(d) { return x(d.Y2019); })
     .attr("height", 10 )
     .attr("fill", "#69b3a2")
+    
+      //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0) )
+    .attr("y", function(d) { return y(d.Title)+10; })
+    .attr("width", function(d) { return x(d.Y2009); })
+    .attr("height", 10 )
+    .attr("fill", "#ca0020")
 
 
     // .attr("x", function(d) { return x(d.Country); })
