@@ -165,19 +165,19 @@ var svg = d3.select("#my_dataviz")
     svg1.append("g")
      
       // Give these new data to update line
-      line
-          .datum(dataFilter)
+      line=svg1
+          .data(dataFilter)
           .transition()
           .duration(1000)
-           .attr("fill", "none")
-      .attr("stroke", "#69b3a2")
-      .attr("stroke-width", 1.5)
           .attr("d", d3.line()
             .x(function(d) { return x(d.Year) })
             .y(function(d) { return y(d.d.Annual_Wage_in_2009_Dollars) })
           )
+                  .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
           
-      dots
+      dots=svg1
         .data(dataFilter)
         .transition()
         .duration(1000)
