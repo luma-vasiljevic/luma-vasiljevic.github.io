@@ -42,11 +42,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }))
     .padding(.1);
+ 
   svg.append("g")
     .call(d3.axisLeft(y))
 
   //Bars
-  svg.selectAll("myRect")
+  svg.selectAll("rect")
     .data(data)
     .enter()
     .append("rect")
