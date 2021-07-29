@@ -6,6 +6,10 @@
 <h1>Changes in Inflation Adjusted Annual Wage by Occupation Between 2009 and 2019</h1>
 <h3>Data obtained from the Bureau of Labor Statistics (https://www.bls.gov/) </h3>
 <h3>Inflation data obtained from macrotrends.net (https://www.macrotrends.net/countries/USA/united-states/inflation-rate-cpi) </h3>
+
+<select id="selectButton" , style = "position:relative; left:800px; top:10px; background-color:yellow;">
+</select>
+
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 <script>
@@ -25,6 +29,19 @@ var svg = d3.select("#my_dataviz")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+// set the dimensions and margins of the graph
+var margin = {top: 20, right: 30, bottom: 60, left: 50},
+    width = 400 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg1 = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 // Parse the Data
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data_filtered.csv", function(data) {
 
@@ -154,4 +171,144 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
 })
 
+//Chart2
+//Read the data
+d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv", function(data) {
+
+    // List of groups (here I have one group per column)
+    var allGroup = d3.map(data, function(d){return(d.Year)}).keys()
+    
+    var dataFilter = data.filter(function(d){return d.Year==allGroup[0]})
+    
+    // add the options to the button
+    d3.select("#selectButton")
+      .selectAll('myOptions')
+     	.data(allGroup)
+      .enter()
+    	.append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+    // A color scale: one color for each group
+    var myColor = d3.scaleOrdinal()
+      .domain(allGroup)
+      .range(d3.schemeSet2);
+
+    // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain([-220,150])
+      .range([ 0, width ]);
+     
+      svg1.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickFormat(d => formatComma(d)+"%"));
+
+    // Add Y axis
+     var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.Title; }));
+     
+       svg1.append("g")
+   .attr("transform", "translate(" + x(0) + ",0)")
+    .call(d3.axisLeft(y))
+
+    svg1.append("text")             
+      .attr("transform",
+            "translate(" + (width/2 + margin.left/2) + " ," + 
+                           (height + margin.bottom -20) + ")")
+      .style("text-anchor", "middle")
+      .text("Percent Difference From National Average");  
+      
+        // create a tooltip
+    var Tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "5px")
+ 
+ 
+      // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function(d) {
+        Tooltip
+          .style("opacity", 1)
+      }
+      var mousemove = function(d) {
+        Tooltip
+          .html("Difference between national average annual wage and annual wage for " +  d.Title+ " in year " + d.Year + " Was " + formatComma(d.Percent_Difference_From_National_Average) +"%")
+          .style("left", (d3.mouse(this)[0]+70) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+      }
+      var mouseleave = function(d) {
+        Tooltip
+          .style("opacity", 0)
+      }
+     
+    // Initialize line with first group of the list
+    var dot = svg1
+      .selectAll('circle')
+      .data(dataFilter)
+      .enter()
+      .append('circle')
+        .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) })
+        .attr("cy", function(d) { return y(d.Title)+10 })
+        .attr("r", 7)
+        .style("fill", "#69b3a2")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+        
+        
+//    var line = svg1
+//      .append('g')
+//      .append("path")
+//        .datum(dataFilter)
+//        .attr("d", d3.line()
+//          .x(function(d) { return x(d.Percent_Difference_From_National_Average) })
+//          .y(function(d) { return y(d.Title) })
+//        )
+//        .attr("stroke", function(d){ return myColor("valueA") })
+//        .style("stroke-width", 4)
+//        .style("fill", "none")
+
+    // A function that update the chart
+    function update(selectedGroup) {
+
+      // Create new data with the selection?
+      var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
+
+      // Give these new data to update line
+ //     line
+ //         .datum(dataFilter)
+ //         .transition()
+  //        .duration(1000)
+   //       .attr("d", d3.line()
+   //         .x(function(d) { return x(d.Percent_Difference_From_National_Average) })
+  //          .y(function(d) { return y(d.Title) })
+ //         )
+  //        .attr("stroke", function(d){ return myColor(selectedGroup) })
+          
+      dot
+        .data(dataFilter)
+        .transition()
+        .duration(1000)
+          .attr("cx", function(d) { return x(d.Percent_Difference_From_National_Average) })
+          .attr("cy", function(d) { return y(d.Title)+10 })
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+    }
+
+    // When the button is changed, run the updateChart function
+    d3.select("#selectButton").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    })
+
+})
 </script>
