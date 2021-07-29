@@ -47,6 +47,34 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
  
   svg.append("g")
     .call(d3.axisLeft(y))
+ 
+      // create a tooltip
+    var Tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "5px")   
+      
+    // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function(d) {
+        Tooltip
+          .style("opacity", 1)
+      }
+      var mousemove = function(d) {
+        Tooltip
+          .html("Annual wage for " +  d.Title + " changed by " + d.change + "% from $" + d.Y2009 +" (inflation adjusted 2009 dollars) to $"+d.Y2019 " (inflation adjusted 2009 dollars) ")
+          .style("left", (d3.mouse(this)[0]+70) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+      }
+      var mouseleave = function(d) {
+        Tooltip
+          .style("opacity", 0)
+      }
+     
 
   //Bars
   svg.selectAll("myRect")
@@ -58,6 +86,9 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("width", function(d) { return x(d.Y2019); })
     .attr("height", 10 )
     .attr("fill", "#69b3a2")
+      .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
     
       //Bars
   svg.selectAll("myRect")
@@ -69,6 +100,9 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("width", function(d) { return x(d.Y2009); })
     .attr("height", 10 )
     .attr("fill", "#ca0020")
+      .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
     
           
   svg.append("rect")
