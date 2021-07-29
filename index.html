@@ -9,7 +9,21 @@
 
 <select id="selectButton" , style = "position:relative; left:800px; top:10px; background-color:yellow;">
 </select>
-
+<style> /* set the CSS */
+body { font: 12px Arial;}
+path { 
+  stroke: steelblue;
+	stroke-width: 2;
+	fill: none;
+}
+.axis path,
+.axis line {
+	fill: none;
+	stroke: grey;
+	stroke-width: 1;
+	shape-rendering: crispEdges;
+}
+</style>
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 <script>
