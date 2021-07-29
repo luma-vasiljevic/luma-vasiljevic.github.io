@@ -145,7 +145,7 @@ var svg = d3.select("#my_dataviz")
          // Add the points
     var dot = svg1
       .selectAll('circle')
-      .data(data)
+      .data(data.filter(function(d){return d.Title==allGroup[0]}))
       .enter()
       .append('circle')
         .attr("cx", function(d) { return x(d.Year) })
