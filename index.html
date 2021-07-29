@@ -173,14 +173,6 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .style("text-anchor", "middle")
       .text("Annual Wage in 2009 Dollars"); 
       
-    
-
-    // .attr("x", function(d) { return x(d.Country); })
-    // .attr("y", function(d) { return y(d.Value); })
-    // .attr("width", x.bandwidth())
-    // .attr("height", function(d) { return height - y(d.Value); })
-    // .attr("fill", "#69b3a2")
-
 })
 
 //Chart2
@@ -206,10 +198,12 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
     
-    svg1.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-      
+        svg1.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+   .selectAll("text")
+     .attr("transform", "translate(-10,0)rotate(-45)")
+     .style("text-anchor", "end");  
     // Add Y axis
     var y  = d3.scaleLinear().range ([height, 0])
    .domain(d3.extent(data.filter(function(d) { return d.Title == allGroup[0] }), function(d) { return d.Annual_Wage_in_2009_Dollars; }));
