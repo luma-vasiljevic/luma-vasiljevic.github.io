@@ -71,6 +71,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
           //Bars
   svg.selectAll("myRect")
     .enter()
+     .data(data)
     .append("rect")
     .attr("x", 650 )
     .attr("y", 70)
@@ -81,6 +82,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
               //Bars
   svg.selectAll("myRect")
     .enter()
+     .data(data)
     .append("rect")
     .attr("x", 650 )
     .attr("y", 50)
