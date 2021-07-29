@@ -90,7 +90,7 @@ var svg = d3.select("#my_dataviz")
       
       
     // Add the line
-    svg1.append("path")
+   var line = svg1.append("path")
       .datum(data.filter(function(d) { return d.Title == 'National average' }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
@@ -141,7 +141,7 @@ var svg = d3.select("#my_dataviz")
       }
       
          // Add the points
-    svg1
+   var dots = svg1
       .append("g")
       .selectAll("dot")
       .data(data.filter(function(d) { return d.Title == 'National average' }))
@@ -155,6 +155,47 @@ var svg = d3.select("#my_dataviz")
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+        
+       // A function that update the chart
+    function update(selectedGroup) {
+
+      // Create new data with the selection?
+      var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
+      
+     
+   y.domain(d3.extent(data.filter(function(d) { return d.Title == selectedGroup }), function(d) { return d.Annual_Wage_in_2009_Dollars; }));
+   
+    
+    svg1.append("g")
+      .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
+      // Give these new data to update line
+      line
+          .datum(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr("d", d3.line()
+            .x(function(d) { return x(d.Year) })
+            .y(function(d) { return y(d.d.Annual_Wage_in_2009_Dollars) })
+          )
+          
+      dots
+        .data(dataFilter)
+        .transition()
+        .duration(1000)
+          .attr("cx", function(d) { return x(d.Year) })
+          .attr("cy", function(d) { return y(d.d.Annual_Wage_in_2009_Dollars) })
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+    }
+
+    // When the button is changed, run the updateChart function
+    d3.select("#selectButton").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value")
+        // run the updateChart function with this selected option
+        update(selectedOption)
+    })
 })
 // Chart 2
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data_filtered.csv", function(data) {
