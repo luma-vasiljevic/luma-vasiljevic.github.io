@@ -68,8 +68,8 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
     // Add X axis --> it is a date format
-    var x = d3.scaleLinear()
-      .domain([0,10])
+    var x = d3.scaleBand()
+    .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
       .range([ 0, width ]);
     svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
