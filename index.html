@@ -162,20 +162,20 @@ var svg = d3.select("#my_dataviz")
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
+      var dataFilter = data.filter(function(d){return d.Title==selectedGroup})
       
     svg1.append("g")
      
       // Give these new data to update line
-       line
+      
+    line
           .datum(dataFilter)
           .transition()
           .duration(1000)
           .attr("d", d3.line()
             .x(function(d) { return x(d.Year) })
             .y(function(d) { return y(d.Annual_Wage_in_2009_Dollars) })
-          )
-                  .on("mouseover", mouseover)
+          )   .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
           
