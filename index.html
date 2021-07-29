@@ -82,7 +82,7 @@ var svg = d3.select("#my_dataviz")
       
     // Add Y axis
     var y  = d3.scaleLinear().range ([height, 0])
-   .domain(d3.extent(data.filter(function(d) { return d.Title == 'National average' }), function(d) { return d.Annual_Wage_in_2009_Dollars; }))
+   .domain(d3.extent(data, function(d) { return d.Annual_Wage_in_2009_Dollars; }))
    .range([ height, 0 ]);
     
     svg1.append("g")
@@ -91,7 +91,7 @@ var svg = d3.select("#my_dataviz")
       
     // Add the line
    var line = svg1.append("path")
-      .datum(data.filter(function(d) { return d.Title == 'National average' }))
+      .datum(data.filter(function(d) { return d.Title == allGroup[0] }))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
       .attr("stroke-width", 1.5)
@@ -162,10 +162,6 @@ var svg = d3.select("#my_dataviz")
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
       
-     
-   y.domain(d3.extent(data.filter(function(d) { return d.Title == selectedGroup }), function(d) { return d.Annual_Wage_in_2009_Dollars; }));
-   
-    
     svg1.append("g")
       .call(d3.axisLeft(y).tickFormat(d => "$"+formatComma(d)));
       // Give these new data to update line
