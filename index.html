@@ -144,7 +144,7 @@ var svg = d3.select("#my_dataviz")
    var dots = svg1
       .append("g")
       .selectAll("dot")
-      .data(data.filter(function(d) { return d.Title == 'National average' }))
+      .data(data.filter(function(d) { return d.Title == allGroup[0] }))
       .enter()
       .append("circle")
       .attr("fill","lightblue")
