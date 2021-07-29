@@ -111,7 +111,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     function update(selectedGroup) {
 
       // Create new data with the selection?
-      var dataFilter = data.map(function(d){return {Title: d.Title, value:d[selectedGroup]} })
+      var dataFilter = data.filter(function(d){return d.Title==allGroup[0]}) 
 
       // Give these new data to update line
       line
