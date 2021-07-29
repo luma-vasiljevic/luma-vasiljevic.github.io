@@ -68,6 +68,16 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("height", 10 )
     .attr("fill", "#ca0020")
 
+     svg.append("g")
+   .attr("transform", "translate(" + x(0) + ",0)")
+    .call(d3.axisLeft(y))
+
+    svg1.append("text")             
+      .attr("transform",
+            "translate(" + (width/2 + margin.left/2) + " ," + 
+                           (height + margin.bottom -20) + ")")
+      .style("text-anchor", "middle")
+      .text("Annual Wage in 2009 Dollars"); 
 
     // .attr("x", function(d) { return x(d.Country); })
     // .attr("y", function(d) { return y(d.Value); })
