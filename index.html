@@ -88,7 +88,7 @@ var svg = d3.select("#my_dataviz")
      // text label for the x axis
     svg1.append("text")             
       .attr("transform",
-            "translate(" + (width/2 + margin.left/2) + " ," + 
+            "translate(" + (width/2 ) + " ," + 
                            (height + margin.bottom -20) + ")")
       .style("text-anchor", "middle")
       .text("Year");    
@@ -97,7 +97,7 @@ var svg = d3.select("#my_dataviz")
   svg1.append("text")
       .attr("dx", (0-40) )
       .attr("dy",(0-10))
-      .text("National Average Annual Wage in 2009 Dollars");  
+      .text("Annual Wage in 2009 Dollars");  
       
         // create a tooltip
     var Tooltip = d3.select("#my_dataviz")
@@ -255,7 +255,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     svg.append("text")             
       .attr("transform",
             "translate(" + (width/2) + " ," + 
-                           (height +margin.bottom - 10) + ")")
+                           (height +margin.bottom - 20) + ")")
       .style("text-anchor", "middle")
       .text("Annual Wage in 2009 Dollars"); 
       
