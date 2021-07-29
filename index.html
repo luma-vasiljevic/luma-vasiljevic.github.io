@@ -143,7 +143,7 @@ var svg = d3.select("#my_dataviz")
       }
       
          // Add the points
-   var dots = svg1
+   var dot = svg1
       .append("g")
       .selectAll("dot")
       .data(data.filter(function(d) { return d.Title == allGroup[0] }))
@@ -179,7 +179,7 @@ var svg = d3.select("#my_dataviz")
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
           
-      dots
+      dot
         .data(dataFilter)
         .transition()
         .duration(1000)
