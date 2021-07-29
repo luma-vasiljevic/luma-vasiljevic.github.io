@@ -82,7 +82,7 @@ var svg = d3.select("#my_dataviz")
       
     // Add Y axis
     var y  = d3.scaleLinear().range ([height, 0])
-   .domain(d3.extent(data, function(d) { return d.Annual_Wage_in_2009_Dollars; }))
+   .domain([0,120000])
    .range([ height, 0 ]);
     
     svg1.append("g")
