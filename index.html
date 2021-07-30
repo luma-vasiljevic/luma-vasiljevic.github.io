@@ -36,12 +36,12 @@ path {
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <!-- Circle are black when hovered-->
 <script>
-// set the dimensions and margins of the graph
+// set the dimensions and margins of the graphs
 var margin = {top: 30, right: 30, bottom: 50, left: 70},
     width = 600 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom
       formatComma = d3.format(",");
-// append the svg object to the body of the page
+// append the svg objects to the body of the page
 var svg = d3.select("#my_dataviz")
   .append("svg")
     .attr("width", width  + margin.left + margin.right)
@@ -59,9 +59,8 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")")   ;
 //Read the data
  data = d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv",
-  // Now I can use this dataset:
-  function(data) {
-    // Add X axis --> it is a date format
+   function(data) {
+    // Add X axis 
     var x = d3.scaleBand()
     .domain([2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019])
     .range([0, width]);
@@ -114,6 +113,7 @@ var svg = d3.select("#my_dataviz")
       .style("border-width", "2px")
       .style("border-radius", "5px")
       .style("padding", "5px")
+    
       // Three function that change the tooltip when user hover / move / leave a cell
       var mouseover = function(d) {
         Tooltip
@@ -150,7 +150,7 @@ var svg = d3.select("#my_dataviz")
 //Read the data
 d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github.io/main/data.csv", function(data) {
 
-    // List of groups (here I have one group per column)
+    // List of groups 
     var allGroup = d3.map(data, function(d){return(d.Year)}).keys()
     
     var dataFilter = data.filter(function(d){return d.Year==allGroup[0]})
@@ -164,12 +164,8 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .text(function (d) { return d; }) // text showed in the menu
       .attr("value", function (d) { return d; }) // corresponding value returned by the button
 
-    // A color scale: one color for each group
-    var myColor = d3.scaleOrdinal()
-      .domain(allGroup)
-      .range(d3.schemeSet2);
-
-    // Add X axis --> it is a date format
+ 
+    // Add X axis 
     var x = d3.scaleLinear()
       .domain([-220,220])
       .range([ 0, width ]);
@@ -179,7 +175,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       .call(d3.axisBottom(x).tickFormat(d => formatComma(d)+"%"));
  
     
-     // Add Y axis
+     // Add Left alighned y axis to show labels left of axis
      var y = d3.scaleBand()
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }));
@@ -190,7 +186,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     return data[i].Title1;
   }))
     
-    // Add Y axis
+    // Add right aligned y axis to show labels right of axis
      var y1 = d3.scaleBand()
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }));
