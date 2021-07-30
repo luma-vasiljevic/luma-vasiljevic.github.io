@@ -174,7 +174,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       line
           .datum(dataFilter)
           .transition()
-          .duration(10000)
+          .duration(5000)
           .attr("d", d3.line()
             .x(function(d) { return x(+d.Year) })
             .y(function(d) { return y(+d.Annual_Wage_in_2009_Dollars) })
@@ -182,7 +182,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       dot
         .data(dataFilter)
         .transition()
-        .duration(10000)
+        .duration(5000)
           .attr("cx", function(d) { return x(+d.Year) })
           .attr("cy", function(d) { return y(+d.Annual_Wage_in_2009_Dollars) })
               .on("mouseover", mouseover)
