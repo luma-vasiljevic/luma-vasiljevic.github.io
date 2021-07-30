@@ -186,7 +186,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
      
        svg1.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
-    .call(d3.axisLeft(y))
+    .call(d3.axisLeft(y).tickFormat(d => d.Title2))
     
     // Add Y axis
      var y1 = d3.scaleBand()
@@ -196,7 +196,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
           
       svg1.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
-    .call(d3.axisRight(y1));
+    .call(d3.axisRight(y1).tickFormat(d => d.Title1));
 
     svg1.append("text")             
       .attr("transform",
