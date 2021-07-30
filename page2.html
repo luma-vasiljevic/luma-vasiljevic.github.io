@@ -259,7 +259,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("y", function(d) { return y(d.Title); })
     .attr("width", function(d) { return x(d.Y2009); })
     .attr("height", 5 )
-    .attr("fill", "gray")
+    .attr("fill", "lightblue")
       .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
@@ -284,7 +284,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
     .attr("y", 3*height/4)
     .attr("width", 10)
     .attr("height", 10 )
-    .attr("fill", "gray")
+    .attr("fill", "lightblue")
 
    svg.append("text")             
       .attr("transform",
