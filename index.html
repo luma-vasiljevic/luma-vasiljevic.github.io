@@ -25,7 +25,7 @@ path {
 <a href="https://luma-vasiljevic.github.io/page2.html">Next Page</a>
 
 <p> Select year from drop-down menu to view comparison of inflation adjusted annual wage across occupations - wage is inflation adjusted to 2009 Dollars</p>
-<p> Hover on dot to display year or occupation specific information below the charts  </p>
+<p> Hover on dots to display year or occupation specific information below the charts  </p>
 <!-- Initialize a select button -->
 <select id="selectButton" , style = "position:relative; left:800px; top:10px; background-color:yellow;">
 </select>
@@ -171,7 +171,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
 
     // Add X axis --> it is a date format
     var x = d3.scaleLinear()
-      .domain([-220,150])
+      .domain([-220,220])
       .range([ 0, width ]);
      
       svg1.append("g")
