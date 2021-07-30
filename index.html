@@ -177,15 +177,26 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).tickFormat(d => formatComma(d)+"%"));
-
-    // Add Y axis
+ 
+    
+     // Add Y axis
      var y = d3.scaleBand()
     .range([ 0, height ])
     .domain(data.map(function(d) { return d.Title; }));
      
        svg1.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y))
+    
+    // Add Y axis
+     var y1 = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.Title; }));
+    
+          
+      svg1.append("g")
+   .attr("transform", "translate(" + x(0) + ",0)")
+    .call(d3.axisRight(y1));
 
     svg1.append("text")             
       .attr("transform",
@@ -246,6 +257,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
       
       y.domain(dataFilter.map(function(d) { return d.Title; }));
+      y1.domain(dataFilter.map(function(d) { return d.Title; }));
           
       dot
         .data(dataFilter)
