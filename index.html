@@ -242,7 +242,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       // Create new data with the selection?
       var dataFilter = data.filter(function(d){return d.Year==selectedGroup})
       
-      y. .domain(dataFilter.map(function(d) { return d.Title; }));
+      y.domain(dataFilter.map(function(d) { return d.Title; }));
           
       dot
         .data(dataFilter)
