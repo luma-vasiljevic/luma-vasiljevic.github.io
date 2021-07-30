@@ -185,7 +185,7 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
      
        svg1.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
-    .call(d3.axisLeft(y).tickFormat(d => ""));
+    .call(d3.axisLeft(y));
 
     svg1.append("text")             
       .attr("transform",
@@ -235,6 +235,8 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+        
+       
         
         
     // A function that update the chart
