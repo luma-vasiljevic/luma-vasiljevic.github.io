@@ -278,24 +278,10 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
     
-          
+    //legend      
   svg.append("rect")
     .attr("x", 3*width/5)
     .attr("y", 3*height/4)
-    .attr("width", 10)
-    .attr("height", 10 )
-    .attr("fill", "#69b3a2")
-
-   svg.append("text")             
-      .attr("transform",
-            "translate(" + (3*width/5 +40) + " ," + 
-                           (3*height/4+10) + ")")
-      .style("text-anchor", "middle")
-      .text("2019"); 
-    
-  svg.append("rect")
-    .attr("x", 3*width/5)
-    .attr("y", 3*height/4+20)
     .attr("width", 10)
     .attr("height", 10 )
     .attr("fill", "#ca0020")
@@ -303,9 +289,23 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
    svg.append("text")             
       .attr("transform",
             "translate(" + (3*width/5 +40) + " ," + 
-                           (3*height/4 +30) + ")")
+                           (3*height/4+10) + ")")
       .style("text-anchor", "middle")
       .text("2009"); 
+    
+  svg.append("rect")
+    .attr("x", 3*width/5)
+    .attr("y", 3*height/4+20)
+    .attr("width", 10)
+    .attr("height", 10 )
+    .attr("fill", "#69b3a2")
+
+   svg.append("text")             
+      .attr("transform",
+            "translate(" + (3*width/5 +40) + " ," + 
+                           (3*height/4 +30) + ")")
+      .style("text-anchor", "middle")
+      .text("2019"); 
       
      svg.append("g")
    .attr("transform", "translate(" + x(0) + ",0)")
