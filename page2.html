@@ -14,6 +14,12 @@ path {
 	stroke-width: 1;
 	shape-rendering: crispEdges;
 }
+footer {
+  text-align: left;
+  padding: 3px;
+  background-color: lightgray;
+  color: white;
+}	
 </style>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
@@ -38,6 +44,14 @@ path {
 <p> Changes in wage were different for different occupations </p>
 <p> Farming, Fishing, and Forestry had the highest relative increase of 10% </p>
 <p> Mathematical and Computer occupations had the highest increase of 4% amongst occupations with above average pay</p>
+
+<footer> 
+<h3> Credits </h3>
+<p>  Built using code segment from: </p>
+<p> <a href = "https://www.d3-graph-gallery.com/"> The D3.js Graph Gallery </a> </p>
+<p> <a href = "https://www.w3schools.com/tags/tag_footer.asp"> The W3 School </a> </p>
+</footer>
+
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <!-- Circle are black when hovered-->
 <script>
@@ -322,3 +336,4 @@ d3.csv("https://raw.githubusercontent.com/luma-vasiljevic/luma-vasiljevic.github
       
 })
 </script>
+
